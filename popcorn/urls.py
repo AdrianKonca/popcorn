@@ -28,7 +28,7 @@ urlpatterns = [
     path('recipes/view/<str:slug>/vote', views.vote_recipe, name='vote_recipe'), #used on front-end
     path('comments/vote/<int:pk>', views.vote_comment, name='vote_comment'), #used on front-end
     path('categories/', views.CategoriesView.as_view(), name='categories'),
-    path('accounts/profile/', views.index),
+    path('accounts/profile/', views.userpage),
     path('accounts/register/',
         RegistrationView.as_view(
             form_class=UserRegistrationForm
