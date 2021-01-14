@@ -1,0 +1,13 @@
+{% extends "popcorn/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Change email" %}{% endblock %}
+{% block content %}
+    <form method='post' action=''>{% csrf_token %}
+        <table>
+            {{ form }}
+            <tr>
+                <td><input type='submit' value="{% trans "Change email" %}"/></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
