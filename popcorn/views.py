@@ -12,11 +12,14 @@ from .models import Recipe, Category, Comment
 
 def index(request):
     return render(request, 'popcorn/main_page.html',
-    {
-        'lastweek': Recipe.objects.get_lastweek(),
-        'recipes': Recipe.objects.get_best_recipes(),
-        'proposed': Recipe.objects.get_proposed()
-    })
+                  {
+                      'lastweek': Recipe.objects.filter(
+                          created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by(
+                          '-vote_score')[:3],
+                      'recipes': Recipe.objects.order_by('-vote_score')[:3],
+                      'proposed': Recipe.objects.order_by('name')[:3]
+                  })
+
 
 
 def recipe(request, slug):
@@ -45,6 +48,10 @@ def edit_recipe(request, slug=None):
     else:
         recipe = get_object_or_404(Recipe, slug=slug)
 
+        # TODO fix unauthorized site
+        if request.user != recipe.author and not request.user.is_superuser:
+            return HttpResponse('Unauthorized', status=401)
+
     if request.method == 'POST':
         form = RecipeForm(request.POST or None, request.FILES or None, instance=recipe)
         if form.is_valid():
@@ -67,8 +74,10 @@ def vote_recipe(request, slug):
     recipe = Recipe.objects.get(slug=slug)
     user = request.user
 
+    # TODO fix unauthorized site
     if not user.is_authenticated:
         return HttpResponse('Unauthorized', status=401)
+
     vote = recipe.votes.get(user.id)
     body = json.loads(request.body)
     action_string = body['action']
@@ -149,3 +158,12 @@ def post_comment(request, slug):
                                            'new_comment': new_comment,
                                            'comment_form': comment_form,
                                            'vote_status': recipe.get_vote_status(request.user)})
+
+
+def userpage(request):
+    user = request.user
+
+    if not user.is_authenticated:
+        return HttpResponse('Unauthorized', status=401)
+
+    return render(request, 'popcorn/user_page.html', {'user': user, 'userrecipes': Recipe.objects.filter(author=user)})
