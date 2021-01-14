@@ -2,5 +2,28 @@
 {% block title %}Strona główna{% endblock %}
 
 {% block content %}
-    {% user %}
+    <p>{{ user }}</p>
+    <p>{{ user.date_joined }}</p>
+    <p>{{ user.email }}</p>
+    <p>{{ user }}</p>
+    {% for r in userrecipes %}
+        <li>
+            {% if forloop.first %}
+                pierwszy
+            {% endif %}
+            <a href=" {% url 'recipe' r.slug %}">{{ r.name }}</a>
+            {#                Opis#}
+            <p>{{ r.content|safe }} </p>
+            {#                Czas przygotowania#}
+            <p>{{ r.preparation_time }}</p>
+            {#                Ilosc porcji#}
+            <p>{{ r.servings_count }}</p>
+            {#                Trudnosc#}
+            <a>{{ r.get_difficulty_display }}</a>
+            <p>{{ r.created_on }}</p>
+            {#            Głosy#}
+            <p>{{ r.vote_score }}</p>
+            <p><img src="{{ r.icon.url }}"></p>
+        </li>
+    {% endfor %}
 {% endblock %}

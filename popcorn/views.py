@@ -58,9 +58,6 @@ def edit_recipe(request, slug=None):
         if request.user != recipe.author and not request.user.is_superuser:
             return HttpResponse('Unauthorized', status=401)
 
-
-
-
     if request.method == 'POST':
         form = RecipeForm(request.POST or None, request.FILES or None, instance=recipe)
         if form.is_valid():
@@ -174,4 +171,5 @@ def userpage(request):
 
     if not user.is_authenticated:
         return HttpResponse('Unauthorized', status=401)
-    return render(request, 'popcorn/user_page.html', {'user': user})
+
+    return render(request, 'popcorn/user_page.html', {'user': user, 'userrecipes': Recipe.objects.filter(author=user)})
