@@ -1,4 +1,3 @@
-import datetime
 import json
 
 from django.conf import settings
@@ -7,27 +6,23 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect, reverse
+
 from django.template import RequestContext
 from django.utils import timezone
+
 from django.views import generic
 
 from .forms import RecipeForm, CommentForm, EmailChangeForm
 from .models import Recipe, Category, Comment
 
-
-# Create your views here.
-# class IndexView(generic.DetailView):
-#     template_name = 'popcorn/main_page.html'
-
 def index(request):
     return render(request, 'popcorn/main_page.html',
-                  {
-                      'lastweek': Recipe.objects.filter(
-                          created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by(
-                          '-vote_score')[:3],
-                      'recipes': Recipe.objects.order_by('-vote_score')[:3],
-                      'proposed': Recipe.objects.order_by('name')[:3]
-                  })
+                {
+                    'lastweek': Recipe.objects.get_lastweek(),
+                    'recipes': Recipe.objects.get_best_recipes(),
+                    'proposed': Recipe.objects.get_proposed()
+                })
+
 
 
 def recipe(request, slug):
@@ -177,13 +172,13 @@ def userpage(request):
     return render(request, 'popcorn/user_page.html', {'user': user, 'userrecipes': Recipe.objects.filter(author=user)})
 
 
-def email_change(request):
-    form = EmailChangeForm
-    if request.method == 'POST':
-        form = EmailChangeForm(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/accounts/profile/")
-    else:
-        return render_to_response('registration/password_reset_email.html', {'form': form},
-                                  context_instance=RequestContext(request))
+# def email_change(request):
+#     form = EmailChangeForm
+#     if request.method == 'POST':
+#         form = EmailChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect("/accounts/profile/")
+#     else:
+#         return render_to_response('registration/password_reset_email.html', {'form': form},
+#                                   context_instance=RequestContext(request))

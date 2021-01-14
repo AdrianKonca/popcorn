@@ -24,8 +24,11 @@ Our task was to create an app as a Team - we chose to do so in Django.
 
 ### Migrating initial data
 
-- `python manage.py dumpdata popcorn > popcorn/fixtures/InitialData.json`
 - `python manage.py loaddata popcorn/fixtures/InitialData.json`
+
+### Dumping data
+
+- `python manage.py dumpdata popcorn > popcorn/fixtures/InitialData.json`
 
 ### Todos
 
