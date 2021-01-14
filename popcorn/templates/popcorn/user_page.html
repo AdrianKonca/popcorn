@@ -6,6 +6,7 @@
     <p>{{ user.date_joined }}</p>
     <p>{{ user.email }}</p>
     <p>{{ user }}</p>
+    <p><a href="{% url 'password_change' %}">Kuzik</a></p>
     {% for r in userrecipes %}
         <li>
             {% if forloop.first %}

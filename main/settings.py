@@ -35,13 +35,13 @@ AUTH_USER_MODEL = 'popcorn.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'popcorn.apps.PopcornConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'popcorn.apps.PopcornConfig',
     'django_extensions',
     'django_summernote',
     'vote',
@@ -66,9 +66,7 @@ SUMMERNOTE_THEME = 'bs4'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

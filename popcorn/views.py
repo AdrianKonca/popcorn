@@ -3,13 +3,15 @@ import json
 
 from django.conf import settings
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect, reverse
+from django.template import RequestContext
 from django.utils import timezone
 from django.views import generic
 
-from .forms import RecipeForm, CommentForm
+from .forms import RecipeForm, CommentForm, EmailChangeForm
 from .models import Recipe, Category, Comment
 
 
@@ -173,3 +175,15 @@ def userpage(request):
         return HttpResponse('Unauthorized', status=401)
 
     return render(request, 'popcorn/user_page.html', {'user': user, 'userrecipes': Recipe.objects.filter(author=user)})
+
+
+def email_change(request):
+    form = EmailChangeForm
+    if request.method == 'POST':
+        form = EmailChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/accounts/profile/")
+    else:
+        return render_to_response('registration/password_reset_email.html', {'form': form},
+                                  context_instance=RequestContext(request))

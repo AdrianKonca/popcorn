@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.urls import include, path
 from django_registration.backends.activation.views import RegistrationView
+from django.contrib.auth import views as auth_views
 
 from . import views
 from .forms import UserRegistrationForm
@@ -27,6 +28,7 @@ urlpatterns = [
     path('recipes/view/<str:slug>/vote', views.vote_recipe, name='vote_recipe'),  # used on front-end
     path('comments/vote/<int:pk>', views.vote_comment, name='vote_comment'),  # used on front-end
     path('categories/', views.CategoriesView.as_view(), name='categories'),
+
     path('accounts/profile/', views.userpage, name='user_page'),
     path('accounts/register/',
          RegistrationView.as_view(
