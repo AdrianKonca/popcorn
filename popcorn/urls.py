@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.urls import include, path
 from django_registration.backends.activation.views import RegistrationView
-from django.contrib.auth import views as auth_views
 
 from . import views
 from .forms import UserRegistrationForm
@@ -41,4 +40,5 @@ urlpatterns = [
          ),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', views.logout_view, name='logout'),
+    path('accounts/change_email', views.email_change, name='email_change'),
 ]

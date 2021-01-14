@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from django_registration.forms import RegistrationForm
 from django_summernote.widgets import SummernoteWidget
 
@@ -83,23 +84,42 @@ class EmailChangeForm(forms.Form):
     e-mail.
     """
     error_messages = {
-        'email_mismatch': ("The two email addresses fields didn't match."),
-        'not_changed': ("The email address is the same as the one already defined."),
+        'password_incorrect': _("Your old password was entered incorrectly. Please enter it again."),
+        'email_mismatch': _("The two email addresses fields didn't match."),
+        'not_changed': _("The email address is the same as the one already defined."),
     }
 
+    old_password = forms.CharField(
+        label=_("Old password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
+    )
+
     new_email1 = forms.EmailField(
-        label=("New email address"),
+        label=_("New email address"),
         widget=forms.EmailInput,
     )
 
     new_email2 = forms.EmailField(
-        label=("New email address confirmation"),
+        label=_("New email address confirmation"),
         widget=forms.EmailInput,
     )
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(EmailChangeForm, self).__init__(*args, **kwargs)
+
+    def clean_old_password(self):
+        """
+        Validate that the old_password field is correct.
+        """
+        old_password = self.cleaned_data["old_password"]
+        if not self.user.check_password(old_password):
+            raise forms.ValidationError(
+                self.error_messages['password_incorrect'],
+                code='password_incorrect',
+            )
+        return old_password
 
     def clean_new_email1(self):
         old_email = self.user.email

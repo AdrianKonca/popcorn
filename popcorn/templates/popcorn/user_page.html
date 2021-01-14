@@ -5,9 +5,11 @@
     <p>{{ user }}</p>
     <p>{{ user.date_joined }}</p>
     <p>{{ user.email }}</p>
-    <p>{{ user }}</p>
-    <p><a href="{% url 'password_change' %}">Kuzik</a></p>
-    {% for r in userrecipes %}
+    <p> {{ user_days_from_registration }}</p>
+
+    <p><a href="{% url 'password_change' %}">Zmiana hasła</a></p>
+    <p><a href="{% url 'email_change' %}">Zmiana e-maila</a></p>
+    {% for r in user_recipes %}
         <li>
             {% if forloop.first %}
                 pierwszy
