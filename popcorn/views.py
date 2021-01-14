@@ -119,6 +119,8 @@ def post_comment(request, slug):
         if not request.user.is_authenticated:
             # Todo add nice page to say that you are not authorized
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+        if request.user != recipe.author and not request.user.is_superuser:
+            return HttpResponse('Unauthorized', status=401)
 
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
