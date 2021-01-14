@@ -17,13 +17,11 @@ from .models import Recipe, Category, Comment
 
 def index(request):
     return render(request, 'popcorn/main_page.html',
-                  {
-                      'lastweek': Recipe.objects.filter(
-                          created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by(
-                          '-vote_score')[:3],
-                      'recipes': Recipe.objects.order_by('-vote_score')[:3],
-                      'proposed': Recipe.objects.order_by('name')[:3]
-                  })
+                {
+                    'lastweek': Recipe.objects.get_lastweek(),
+                    'recipes': Recipe.objects.get_best_recipes(),
+                    'proposed': Recipe.objects.get_proposed()
+                })
 
 
 
