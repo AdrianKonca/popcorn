@@ -1,4 +1,3 @@
-import datetime
 import json
 
 from django.conf import settings
@@ -6,16 +5,10 @@ from django.contrib.auth import logout
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect, reverse
-from django.utils import timezone
 from django.views import generic
 
 from .forms import RecipeForm, CommentForm
 from .models import Recipe, Category, Comment
-
-
-# Create your views here.
-# class IndexView(generic.DetailView):
-#     template_name = 'popcorn/main_page.html'
 
 def index(request):
     return render(request, 'popcorn/main_page.html',
@@ -26,6 +19,7 @@ def index(request):
                       'recipes': Recipe.objects.order_by('-vote_score')[:3],
                       'proposed': Recipe.objects.order_by('name')[:3]
                   })
+
 
 
 def recipe(request, slug):

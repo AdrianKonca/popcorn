@@ -5,7 +5,9 @@ from django.db import models
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from vote.models import VoteModel
+from django.utils import timezone
 
+import datetime
 # TODO: Add validators in different areas (images), but research them first
 # TODO: Research https://django-simple-history.readthedocs.io for approval history
 # TODO: Add convertion of images uploaded by users that are not jpeg's to jpeg's
@@ -55,6 +57,38 @@ class VoteUtilities():
             return self.ACTIONS[vote.action]
         return self.NONE_ACTION
 
+class RecipeManager(models.Manager):
+
+    def get_lastweek(self, amount=3):
+        recipes = list(Recipe.objects.filter(created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by('-vote_score'))
+        count = len(recipes)        
+        if count == 0:
+            return []
+        if count < amount:
+            for i in range(count, amount):
+                recipes.append(recipes[i%count])
+        return recipes[:amount]
+
+    def get_best_recipes(self, amount=3):
+        recipes = list(Recipe.objects.order_by('-vote_score'))
+        count = len(recipes)
+        if count == 0:
+            return []
+        if count < amount:
+            for i in range(count, amount):
+                recipes.append(recipes[i%count])
+        return recipes[:amount]
+
+    def get_proposed(self, amount=3):
+        recipes = list(Recipe.objects.order_by('name'))
+        count = len(recipes)
+        if count == 0:
+            return []
+        if count < amount:
+            for i in range(count, amount):
+                recipes.append(recipes[i%count])
+        return recipes[:amount]
+
 class Recipe(VoteModel, models.Model, VoteUtilities):
     class Difficulty(models.IntegerChoices):
         VERY_EASY = 1, ('Bardzo łatwa')
@@ -81,6 +115,7 @@ class Recipe(VoteModel, models.Model, VoteUtilities):
     deleted_on = models.DateTimeField(null=True, blank=True)
     deleted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='deleted_recipes',
                                    blank=True)
+    objects = RecipeManager()
 
     def is_hidden(self):
         return self.hidden_on is not None
