@@ -16,7 +16,7 @@
 }
 
 .classic-btn {
-    background-color: #fffce6;
+    background-color: #fffad7;
     border-style: none;
 }
 
@@ -65,13 +65,59 @@
 
 .vote {
     cursor: pointer;
-    background-color: gray;
+    background-color: #ffdfa8;
+    border-style: none;
 }
 
 .vote-up {
-    background-color: greenyellow;
+    background-color: rgb(180, 255, 41);
 }
 
 .vote-down {
-    background-color: orange;
+    background-color: rgb(255, 112, 17);
 }
+
+
+.top1 {
+    /* height:390px; */
+    background-color:#FFFFFF;
+    margin-top:10px;
+    overflow: hidden;
+}
+
+.top1 img {
+    height:100%;
+}
+
+.food1 {
+    background-color:#000000;
+    height:500px;
+}
+
+.carousel {
+    width: auto;
+    max-height: 420px;
+    overflow: hidden;
+}
+
+.main-box {
+    margin-bottom: 500px;
+}
+
+/* body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    padding-bottom: 200px;
+    /* box-sizing: border-box; */
+  /* }
+  
+  footer {
+    position: absolute;
+    bottom: 0;
+    height: 200px;
+  } */ 
+.test-img {
+    max-height: 360px;
+}
+

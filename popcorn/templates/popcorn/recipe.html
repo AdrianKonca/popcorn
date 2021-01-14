@@ -11,8 +11,12 @@
     <div class="card margin-big ">
         <div class="card-body">
             <div class="col">
+                <div class="col">
+                    <div class="text-right">
+                        <a class="btn classic-btn" href=" {% url 'edit_recipe' recipe.slug %}">Edytuj</a>
+                    </div>
+                </div>
                 <h2 class="card-title text-center">{{ recipe.name }}</h2>
-                <a href=" {% url 'edit_recipe' recipe.slug %}">Edytuj</a>
                 {% if recipe.author %}
                     <h4 class="text-center">Autor: {{ recipe.author }}</h4>
                 {% else %}
@@ -23,7 +27,13 @@
                 <h4 class="text-center">Trudność wykonania: {{ recipe.get_difficulty_display }}</h4>
                 <!--TODO: Add scaling-->
                 {% if recipe.icon %}
-                    <img src="{{ recipe.icon.url }}">
+                <div class="span3 top1">  
+                    <div class="row">
+                        <div class="span3 food1">
+                            <img  src="{{ recipe.icon.url }}" class="image-responsive">
+                        </div>
+                    </div>
+                </div>
                 {% endif %}
 
                 <!--TODO: Add ingredients -->
@@ -53,7 +63,13 @@
                     <form method="post" style="margin-top: 1.3em;">
                         {{ comment_form.as_p }}
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary btn-lg">Odpowiedz</button>
+
+                            <div class="col">
+                                <div class="text-right">
+                                    <button type="submit" class="btn classic-btn cstm-shadow btn-lg btn-block">Odpowiedz</button>
+                                </div>
+                            </div>
+
                     </form>
                 {% else %}
                     <p>Zaloguj się aby mieć możliwość dodawania komentarzy.</p>
@@ -63,9 +79,9 @@
                 <ol>
                     {% for c, status in comments %}
                         {% if c.author %}
-                            <a>Autor: {{ c.author }} </a>
+                            <a><strong>Autor:</strong> {{ c.author }} </a>
                         {% else %}
-                            <a>Autor: [Skasowany] </a>
+                            <a><strong>Autor:</strong> [Skasowany] </a>
                         {% endif %}
                         <div class="text" id="comment-vote-count-{{ c.id }}">Głosy: {{ c.vote_score }}</div>
                         {% if user.is_authenticated %}
