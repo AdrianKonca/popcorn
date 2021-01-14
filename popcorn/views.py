@@ -174,13 +174,13 @@ def userpage(request):
     return render(request, 'popcorn/user_page.html', {'user': user, 'userrecipes': Recipe.objects.filter(author=user)})
 
 
-def email_change(request):
-    form = EmailChangeForm
-    if request.method == 'POST':
-        form = EmailChangeForm(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/accounts/profile/")
-    else:
-        return render_to_response('registration/password_reset_email.html', {'form': form},
-                                  context_instance=RequestContext(request))
+# def email_change(request):
+#     form = EmailChangeForm
+#     if request.method == 'POST':
+#         form = EmailChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect("/accounts/profile/")
+#     else:
+#         return render_to_response('registration/password_reset_email.html', {'form': form},
+#                                   context_instance=RequestContext(request))
