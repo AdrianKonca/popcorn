@@ -13,6 +13,7 @@ django-registration = "==3.1.1"
 Django = "==3.1.2"
 pillow = "*"
 django-summernote = "*"
+mixer = "*"
 
 [requires]
 python_version = "3.7"
