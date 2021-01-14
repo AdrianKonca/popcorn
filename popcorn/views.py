@@ -17,13 +17,11 @@ from .models import Recipe, Category, Comment
 
 def index(request):
     return render(request, 'popcorn/main_page.html',
-                  {
-                      'lastweek': Recipe.objects.filter(
-                          created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by(
-                          '-vote_score')[:3],
-                      'recipes': Recipe.objects.order_by('-vote_score')[:3],
-                      'proposed': Recipe.objects.order_by('name')[:3]
-                  })
+                {
+                    'lastweek': Recipe.objects.get_lastweek(),
+                    'recipes': Recipe.objects.get_best_recipes(),
+                    'proposed': Recipe.objects.get_proposed()
+                })
 
 
 
@@ -133,8 +131,6 @@ def post_comment(request, slug):
         if not request.user.is_authenticated:
             # Todo add nice page to say that you are not authorized
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-        if request.user != recipe.author and not request.user.is_superuser:
-            return HttpResponse('Unauthorized', status=401)
 
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
