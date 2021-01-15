@@ -237,27 +237,27 @@ msgstr "Nazwa użytkownika"
 
 #: .\popcorn\forms.py:123
 msgid "Your old password was entered incorrectly. Please enter it again."
-msgstr ""
+msgstr "Wprowadziłeś złe hasło. Wprowadź je ponownie."
 
 #: .\popcorn\forms.py:124
 msgid "The two email addresses fields didn't match."
-msgstr ""
+msgstr "Podane adresy różnią się od siebie."
 
 #: .\popcorn\forms.py:125
 msgid "The email address is the same as the one already defined."
-msgstr ""
+msgstr "Adres mailowy który został podany jest taki sam jak obecny."
 
 #: .\popcorn\forms.py:129
 msgid "Old password"
-msgstr ""
+msgstr "Stare hasło"
 
 #: .\popcorn\forms.py:135
 msgid "New email address"
-msgstr ""
+msgstr "Nowy adres mailowy"
 
 #: .\popcorn\forms.py:140
 msgid "New email address confirmation"
-msgstr ""
+msgstr "Potwierdzenie nowego adresu mailowego"
 
 #: .\popcorn\templates\django_registration\activation_complete.html:3
 msgid "Activation complete"
