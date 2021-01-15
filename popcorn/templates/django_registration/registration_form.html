@@ -12,9 +12,7 @@
             {% csrf_token %}
                 {% for field in form.visible_fields %}
                     <div class="form-group">
-                        
-                        <h5 class="helptext">{{ field.label_tag }}</h5>
-                        
+                        <h5 class="helptext">{{ field.label }}</h5>
                         {% if form.is_bound %}
                             {% if field.errors %}
                                 {% render_field field class="form-control inputBox is-invalid" %}
