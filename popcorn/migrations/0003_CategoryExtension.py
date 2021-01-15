@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('popcorn', '0002_Comment'),
     ]
@@ -13,6 +12,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='category',
             name='tag',
-            field=models.IntegerField(choices=[(1, 'Czasowa'), (2, 'Pora'), (3, 'Rodzaj'), (4, 'Kategoria')], default=4),
+            field=models.IntegerField(choices=[(1, 'Czasowa'), (2, 'Pora'), (3, 'Rodzaj'), (4, 'Kategoria')],
+                                      default=4),
         ),
     ]

@@ -26,6 +26,7 @@ function updateVoteButtonStyle(result, voteUpButton, voteDownButton) {
         voteDownButton.classList.remove('vote-down')
     }
 }
+
 function updateCommentVoteValue(body, id) {
     if (body === null) {
         return;
@@ -33,7 +34,7 @@ function updateCommentVoteValue(body, id) {
     const voteCount = body.count;
     const result = body.action;
     document.getElementById('comment-vote-count-' + id.toString()).innerHTML = `Głosy: ${voteCount}`;
-    const voteUpButton = document.getElementById('comment-vote-button-up-' + id.toString()) ;
+    const voteUpButton = document.getElementById('comment-vote-button-up-' + id.toString());
     const voteDownButton = document.getElementById('comment-vote-button-down-' + id.toString());
     updateVoteButtonStyle(result, voteUpButton, voteDownButton);
 }
@@ -46,16 +47,15 @@ function updateRecipeVoteValue(body) {
     const result = body.action;
 
     document.getElementById('recipe-vote-count').innerHTML = `Głosy: ${voteCount}`;
-    const voteUpButton = document.getElementById('recipe-vote-button-up') 
-    const voteDownButton = document.getElementById('recipe-vote-button-down') 
+    const voteUpButton = document.getElementById('recipe-vote-button-up')
+    const voteDownButton = document.getElementById('recipe-vote-button-down')
     updateVoteButtonStyle(result, voteUpButton, voteDownButton);
 }
 
 function parseResponse(response) {
     if (response.status === 200) {
         return response.json();
-    }
-    else {
+    } else {
         return null;
     }
 }
@@ -69,7 +69,7 @@ function voteComment(event) {
         {
             method: 'POST',
             headers: {'X-CSRFToken': csrftoken},
-            body: JSON.stringify({ action: action })
+            body: JSON.stringify({action: action})
         }
     ).then(response => parseResponse(response)).then(body => updateCommentVoteValue(body, id));
 }
@@ -82,7 +82,7 @@ function voteRecipe(event) {
         {
             method: 'POST',
             headers: {'X-CSRFToken': csrftoken},
-            body: JSON.stringify({ action: action })
+            body: JSON.stringify({action: action})
         }
     ).then(response => parseResponse(response)).then(body => updateRecipeVoteValue(body));
 }

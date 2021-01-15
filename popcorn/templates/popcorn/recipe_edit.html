@@ -5,7 +5,8 @@
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zapisz">Przeslij przepis!</button>
+        <button class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zapisz">Przeslij przepis!
+        </button>
     </form>
-    
+
 {% endblock %}

@@ -4,44 +4,44 @@
 {% load static %}
 {% block title %}Rejestracja{% endblock %}
 {% block content %}
-<div class="container top-buffer-big">
+    <div class="container top-buffer-big">
 
-    <div class="row">
-        <div class="col py-2 d-flex flex-column">
-            <form method='post' action=''>
-            {% csrf_token %}
-                {% for field in form.visible_fields %}
-                    <div class="form-group">
-                        
-                        <h5 class="helptext">{{ field.label_tag }}</h5>
-                        
-                        {% if form.is_bound %}
-                            {% if field.errors %}
-                                {% render_field field class="form-control inputBox is-invalid" %}
-                                {% for error in field.errors %}
-                                <div class="invalid-feedback">
-                                    {{ error }}
-                                </div>
-                                {% endfor %}
+        <div class="row">
+            <div class="col py-2 d-flex flex-column">
+                <form method='post' action=''>
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+
+                            <h5 class="helptext">{{ field.label_tag }}</h5>
+
+                            {% if form.is_bound %}
+                                {% if field.errors %}
+                                    {% render_field field class="form-control inputBox is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control inputBox is-valid" %}
+                                {% endif %}
                             {% else %}
-                                {% render_field field class="form-control inputBox is-valid" %}
+                                {% render_field field class="form-control inputBox" %}
                             {% endif %}
-                        {% else %}
-                            {% render_field field class="form-control inputBox" %}
-                        {% endif %}
 
-                        {% if field.help_text %}
-                            <small class="form-text text-muted">{{ field.help_text }}</small>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-                <input class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zarejestruj się">
-            </form>
-        </div>
-        
-        <div class="col py-2 d-flex flex-column">
-            <img src="{% static 'popcorn/images/logo.png' %}" class="img-fluid" alt="Responsive image">
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zarejestruj się">
+                </form>
+            </div>
+
+            <div class="col py-2 d-flex flex-column">
+                <img src="{% static 'popcorn/images/logo.png' %}" class="img-fluid" alt="Responsive image">
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
