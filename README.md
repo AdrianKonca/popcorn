@@ -37,6 +37,7 @@ Our task was to create an app as a Team - we chose to do so in Django.
 - `New-Item -ItemType Junction -Path "links/LibraryName" -Target "TargetToEnvFolder"`
 - Remember that you must create link all of the currently used applications, as the translations will get lost when regenerating the file!
 - Create localization files using `python manage.py makemessages --locale=pl`
+- To test transaction run `python manage.py compilemessages`
 - After translating everything that needs translation you can commit the file.
 
 ### Todos
