@@ -30,13 +30,22 @@ Our task was to create an app as a Team - we chose to do so in Django.
 
 - `python manage.py dumpdata popcorn > popcorn/fixtures/InitialData.json`
 
+### Translating third-party libraries
+
+- Create symlink to the desired third-party library in links folder.
+- In case of powershell in can be done like this (it needs to be launched in elevated mode)
+- `New-Item -ItemType Junction -Path "links/LibraryName" -Target "TargetToEnvFolder"`
+- Remember that you must create link all of the currently used applications, as the translations will get lost when regenerating the file!
+- Create localization files using `python manage.py makemessages --locale=pl`
+- After translating everything that needs translation you can commit the file.
+
 ### Todos
 
-- Fix login style
-- Fix registration style
-- Create main page
-- Create add recipe page
-- Create view recipe page
+- Fix user page
+- Fix category page
+- Fix reset passwort page
+- Fix js in main page
+
 
 ### Copyrights
 
