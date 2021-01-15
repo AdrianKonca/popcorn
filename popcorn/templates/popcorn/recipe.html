@@ -27,17 +27,17 @@
                 <h4 class="text-center">Trudność wykonania: {{ recipe.get_difficulty_display }}</h4>
                 <!--TODO: Add scaling-->
                 {% if recipe.icon %}
-                <div class="span3 top1">  
-                    <div class="row">
-                        <div class="span3 food1">
-                            <img  src="{{ recipe.icon.url }}" class="image-responsive">
+                    <div class="span3 top1">
+                        <div class="row">
+                            <div class="span3 food1">
+                                <img src="{{ recipe.icon.url }}" class="image-responsive">
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endif %}
 
                 <!--TODO: Add ingredients -->
-                <!--TODO: Add categories -->
+
                 <!--TODO: Add voting-->
                 {% if user.is_authenticated %}
                     {% if vote_status == 'up' %}
@@ -55,6 +55,7 @@
                 {% endif %}
                 <h4 class="text-center" id="recipe-vote-count">Głosy: {{ recipe.vote_score }}</h4>
                 <h4 class="text-center"></h4>
+
                 <!--TODO: Add food icon-->
                 {{ recipe.content|safe }}
                 <br></br>
@@ -64,13 +65,16 @@
                         {{ comment_form.as_p }}
                         {% csrf_token %}
 
-                            <div class="col">
-                                <div class="text-right">
-                                    <button type="submit" class="btn classic-btn cstm-shadow btn-lg btn-block">Odpowiedz</button>
-                                </div>
+                        <div class="col">
+                            <div class="text-right">
+                                <button type="submit" class="btn classic-btn cstm-shadow btn-lg btn-block">Odpowiedz
+                                </button>
                             </div>
+                        </div>
 
                     </form>
+
+
                 {% else %}
                     <p>Zaloguj się aby mieć możliwość dodawania komentarzy.</p>
                 {% endif %}
@@ -101,7 +105,11 @@
                         <hr>
                     {% endfor %}
                 </ol>
-                
+
+                <!--TODO: Add categories -->
+                {% for tag in recipe.categories.all %}
+                    <a href={% url 'category' tag.id %}> {{ tag }}</a>
+                {% endfor %}
             </div>
         </div>
     </div>

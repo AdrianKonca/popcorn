@@ -1,31 +1,27 @@
+import itertools
 import json
 
-from django.conf import settings
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render, redirect, reverse
-
-from django.template import RequestContext
+from django.shortcuts import render, reverse
 from django.utils import timezone
-
 from django.views import generic
 
 from .forms import RecipeForm, CommentForm, EmailChangeForm
 from .models import Recipe, Category, Comment
 
+
 def index(request):
     return render(request, 'popcorn/main_page.html',
-                {
-                    'lastweek': Recipe.objects.get_lastweek(),
-                    'recipes': Recipe.objects.get_best_recipes(),
-                    'proposed': Recipe.objects.get_proposed()
-                })
+                  {
+                      'lastweek': Recipe.objects.get_lastweek(),
+                      'recipes': Recipe.objects.get_best_recipes(),
+                      'proposed': Recipe.objects.get_proposed()
+                  })
 
 
-
-def recipe(request, slug):
+def recipe(request):
     return render(request, 'popcorn/recipe.html')
 
 
@@ -43,17 +39,15 @@ class CategoriesView(generic.ListView):
 def edit_recipe(request, slug=None):
     # TODO: Automatically attach time category
     if not request.user.is_authenticated:
-        # Todo add nice page to say that you are not authorized
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+        return render(request, 'popcorn/unauthorized.html')
 
     if slug is None:
         recipe = None
     else:
         recipe = get_object_or_404(Recipe, slug=slug)
 
-        # TODO fix unauthorized site
         if request.user != recipe.author and not request.user.is_superuser:
-            return HttpResponse('Unauthorized', status=401)
+            return render(request, 'popcorn/unauthorized.html')
 
     if request.method == 'POST':
         form = RecipeForm(request.POST or None, request.FILES or None, instance=recipe)
@@ -77,9 +71,8 @@ def vote_recipe(request, slug):
     recipe = Recipe.objects.get(slug=slug)
     user = request.user
 
-    # TODO fix unauthorized site
     if not user.is_authenticated:
-        return HttpResponse('Unauthorized', status=401)
+        return render(request, 'popcorn/unauthorized.html')
 
     vote = recipe.votes.get(user.id)
     body = json.loads(request.body)
@@ -129,8 +122,8 @@ def post_comment(request, slug):
     # Comment posted
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            # Todo add nice page to say that you are not authorized
-            return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+            return render(request, 'popcorn/unauthorized.html')
+            # return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
 
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -165,20 +158,44 @@ def post_comment(request, slug):
 
 def userpage(request):
     user = request.user
-
     if not user.is_authenticated:
-        return HttpResponse('Unauthorized', status=401)
+        return render(request, 'popcorn/unauthorized.html')
+    return render(request, 'popcorn/user_page.html', {'user': user,
+                                                      'user_recipes': Recipe.objects.filter(author=user),
+                                                      'user_days_from_registration': (
+                                                              timezone.now() - user.date_joined).days})
 
-    return render(request, 'popcorn/user_page.html', {'user': user, 'userrecipes': Recipe.objects.filter(author=user)})
+
+def email_change(request):
+    if not request.user.is_authenticated:
+        return render(request, 'popcorn/unauthorized.html')
+
+    form = EmailChangeForm(request.user)
+    if request.method == 'POST':
+        form = EmailChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/accounts/profile/")
+    return render(request, 'registration/change_email.html', {'form': form})
 
 
-# def email_change(request):
-#     form = EmailChangeForm
-#     if request.method == 'POST':
-#         form = EmailChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect("/accounts/profile/")
-#     else:
-#         return render_to_response('registration/password_reset_email.html', {'form': form},
-#                                   context_instance=RequestContext(request))
+def category_viev(request, i=None):
+    get_object_or_404(Category, id=i)
+    lists = chunks(Recipe.objects.filter(categories=i).order_by('-vote_score'), 3)
+    return render(request, 'popcorn/category.html', {'recipes': lists})
+
+
+def all_recipes(request):
+    lists = Recipe.objects.get_in_chunks_best_recipes(0, 3)
+    return render(request, 'popcorn/recipes.html', {'recipes': lists})
+
+
+def chunks(value, chunk_length):
+    clen = int(chunk_length)
+    i = iter(value)
+    while True:
+        chunk = list(itertools.islice(i, clen))
+        if chunk:
+            yield chunk
+        else:
+            break
