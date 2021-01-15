@@ -22,6 +22,7 @@ from .forms import UserRegistrationForm
 urlpatterns = [
     path('', views.index, name='index'),
     path('recipes/add/', views.edit_recipe, name='add_recipe'),
+    path('recipes/all/', views.all_recipes, name='all_recipes'),
     path('recipes/edit/<str:slug>', views.edit_recipe, name='edit_recipe'),
     path('recipes/view/<str:slug>', views.post_comment, name='recipe'),
     path('recipes/view/<str:slug>/vote', views.vote_recipe, name='vote_recipe'),  # used on front-end
