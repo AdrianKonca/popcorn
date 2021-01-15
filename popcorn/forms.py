@@ -2,20 +2,44 @@ from django import forms
 from django_registration.forms import RegistrationForm
 from django_summernote.widgets import SummernoteWidget
 
-from .models import Recipe, User, Comment
+from .models import Recipe, User, Comment, Category
 
+class CategoriesModelChoiceIterator(forms.models.ModelChoiceIterator):
+    def __iter__(self):
+        group = ""
+        subgroup = []
+        for category in self.queryset:
+            if not group:
+                group = category.get_tag_display()
 
-# Adding css to django class
-# https://stackoverflow.com/questions/5827590/css-styling-in-django-forms
-# https://docs.djangoproject.com/en/2.2/topics/forms/#working-with-form-templates
-# https://www.youtube.com/watch?v=6-XXvUENY_8
+            if group != category.get_tag_display():
+                yield (group, subgroup)
+                group = category.get_tag_display()
+                subgroup = [(category.id, category.name)]
+            else:
+                subgroup.append((category.id, category.name))
+        yield (group, subgroup)
 
-# https://stackoverflow.com/questions/3737116/how-to-add-optgroups-to-a-django-modelmultiplechoicefield
+class CategoriesField(forms.ModelMultipleChoiceField):
+    iterator = CategoriesModelChoiceIterator
+
+class CheckboxSelectMultipleCustom(forms.CheckboxSelectMultiple):
+    template_name = 'popcorn/multiple_input.html'
+    option_template_name = 'popcorn/input_option.html'
 
 class RecipeForm(forms.ModelForm):
     # name = forms.CharField()
     # difficulty = forms.ChoiceField()
     # recipe = SummernoteTextFormField()
+    def __init__(self, *args, **kwargs):
+        super(RecipeForm, self).__init__(*args, **kwargs)
+        
+        self.fields['categories'].label = 'Kategorie'
+
+        if self.instance:
+            self.fields['categories'].initial = None
+
+    categories = CategoriesField(queryset=Category.objects.all(), widget = forms.CheckboxSelectMultiple(attrs={'class': 'my-class'}))
 
     class Meta:
         model = Recipe
@@ -33,8 +57,6 @@ class RecipeForm(forms.ModelForm):
             'difficulty': forms.Select(attrs={'class': 'form-control'}),
             'preparation_time': forms.NumberInput(attrs={'class': 'form-control'}),
             'servings_count': forms.NumberInput(attrs={'class': 'form-control'}),
-            'categories': forms.CheckboxSelectMultiple(choices=["blablabla"]),
-            # 'icon': forms.ImageField(),
             'content': SummernoteWidget({
                 'summernote': {
                     'width': '100%',
@@ -47,7 +69,6 @@ class RecipeForm(forms.ModelForm):
             'difficulty': 'Trudność',
             'preparation_time': 'Czas przygotowania (w minutach)',
             'servings_count': 'Ilość porcji',
-            'categories': 'Kategorie',
             'icon': 'Miniaturka',
             'content': '',
         }
