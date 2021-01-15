@@ -32,11 +32,11 @@ Our task was to create an app as a Team - we chose to do so in Django.
 
 ### Todos
 
-- Fix login style
-- Fix registration style
-- Create main page
-- Create add recipe page
-- Create view recipe page
+- Fix user page
+- Fix category page
+- Fix reset passwort page
+- Fix js in main page
+
 
 ### Copyrights
 
