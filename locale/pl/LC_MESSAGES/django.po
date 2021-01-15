@@ -317,7 +317,7 @@ msgstr ""
 #: .\popcorn\templates\registration\change_email.html:3
 #: .\popcorn\templates\registration\change_email.html:9
 msgid "Change email"
-msgstr ""
+msgstr "Zmień email"
 
 #: .\popcorn\templates\registration\logged_out.html:8
 msgid "Thanks for spending some quality time with the website today."
