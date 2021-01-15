@@ -1,57 +1,44 @@
 {% extends "popcorn/base.html" %}
+{% load widget_tweaks %}
 {% load i18n %}
-{% block title %}{% trans "Login" %}{% endblock %}
+{% block title %}{% trans "Login page" %}{% endblock %}
 {% block content %}
     {% url 'password_reset' as auth_pwd_reset_url %}
     {% url 'django_registration_register' as register_url %}
 
-    {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
-            {% endfor %}
-        {% endfor %}
-        {% if form.non_field_errors %}
-            <ul class="errorlist nonfield">
-                {% for error in form.non_field_errors %}
-                    <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endif %}
-
-
     <div class="container top-buffer-big">
         <div class="row align-items-top">
             <div class="col py-2">
-                <form method="post" action="{% url 'login' %}">{% csrf_token %}
+                <h2 class="top-buffer naglowek cstm-shadow">{% trans "Login" %}</h2>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            {% if not forloop.last %}
+                                {% render_field field class="form-control top-buffer inputBox cstm-shadow" placeholder=field.label %}
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                            {% else %}
+                                {% for error in form.non_field_errors %}
+                                    <span class="error text-danger">{{ error }}</span>
+                                {% endfor %}
+                                <div class="checkbox mb-3 top-buffer">
+                                    {{ field }} {{ field.label_tag }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
 
-                    <h2 class="top-buffer naglowek cstm-shadow">Logowanie</h2>
-                    <input type="text" placeholder="Nazwa użytkownika" name="username" autofocus=""
-                           autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username"
-                           class="form-control top-buffer inputBox cstm-shadow">
-                    <input type="password" name="password" autocomplete="current-password" required="" id="id_password"
-                           class="form-control top-buffer inputBox cstm-shadow" placeholder="Hasło">
-                    <!--input type="hidden" name="next" value="{{ next }}" /-->
-
-                    <div class="checkbox mb-3 top-buffer">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Zapamiętaj mnie
-                        </label>
-                    </div>
-
-                    <button class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit">{% trans "login" %}
+                    <button class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit">{% trans "Login" %}
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill"
-                             fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                    d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
+                             fill="currentColor"  xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
                         </svg>
-
                     </button>
                 </form>
                 <button class="mt-auto btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
-                        onclick="location.href = '{% url 'password_reset' %}'">Resetuj hasło
+                        onclick="location.href = '{% url 'password_reset' %}'">{% trans "Reset password" %}
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -75,13 +62,6 @@
 
     </div>
 
-
-
-    <!--TODO IMPLEMENT-->
-    <!--p>{% blocktrans %}<a href="{{ auth_pwd_reset_url }}">Forgot your password?</a>{% endblocktrans %}</p-->
-
-    {# NOTE: settings is not put into the template by default, you have to override the login view with extra_context #}
-    {# See https://docs.djangoproject.com/en/2.2/topics/auth/default/#django.contrib.auth.views.LoginView #}
     {% if settings.REGISTRATION_OPEN %}
         <p>{% blocktrans %}<a href="{{ register_url }}">Need an account</a>?{% endblocktrans %}</p>
     {% endif %}
