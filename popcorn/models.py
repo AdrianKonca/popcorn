@@ -145,6 +145,9 @@ class Recipe(VoteModel, models.Model, VoteUtilities):
                                    blank=True)
     objects = RecipeManager()
 
+    def __str__(self):
+        return self.name
+
     def is_hidden(self):
         return self.hidden_on is not None
 

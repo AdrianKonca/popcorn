@@ -109,6 +109,9 @@ ENV/
 
 .DS_Store
 *.sqlite3
+
+#Localization symlinks
+links/*
 # 
 media/*
 !media/categories

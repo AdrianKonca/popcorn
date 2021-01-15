@@ -1,43 +1,47 @@
 {% extends "popcorn/base.html" %}
 {% load i18n %}
+{% load widget_tweaks %}
+{% load static %}
 {% block title %}Rejestracja{% endblock %}
 {% block content %}
-    <table>
-        <div class="container top-buffer-big">
-            <div class="col py-2">
-                <h2 class="top-buffer naglowek cstm-shadow">Rejestracja</h2>
+<div class="container top-buffer-big">
 
-                <form method='post' action=''>{% csrf_token %}
-                    <h5 class="helptext">Podaj nazwę użytkownika:</h5>
-                    <input class="form-control inputBox cstm-shadow" type="text" name="username"
-                           maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required=""
-                           id="id_username" placeholder="Nazwa użytkownika">
-                    <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
-                    <h5 class="helptext">Podaj adres e-mail:</h5>
-                    <input class="form-control inputBox cstm-shadow" type="email" name="email"
-                           maxlength="254" required="" id="id_email" placeholder="Adres Email">
-                           <h5 class="helptext">Podaj hasło:</h5>
-                    <input class="form-control inputBox cstm-shadow" type="password" name="password1"
-                           autocomplete="new-password" required="" id="id_password1" placeholder="Hasło">
-                    <span class="helptext">
-                <ul>
-                    <li>Your password can’t be too similar to your other personal information.</li>
-                    <li>Your password must contain at least 8 characters.</li>
-                    <li>Your password can’t be a commonly used password.</li>
-                    <li>Your password can’t be entirely numeric.</li>
-                </ul>
-            </span>
-            <h5 class="helptext">Potwierdź hasło</span>
-                    <input class="form-control inputBox cstm-shadow" type="password" name="password2"
-                           autocomplete="new-password" required="" id="id_password2" placeholder="Potwierdź hasło"><br>
-                    <input class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zarejestruj się">
-                </form>
-            </div>
-            {% load static %}
-            <div class="col py-2 d-flex flex-column">
-                <img src="{% static 'popcorn/images/logo.png' %}" class="img-fluid" alt="Responsive image">
-            </div>
+    <div class="row">
+        <div class="col py-2 d-flex flex-column">
+            <form method='post' action=''>
+            {% csrf_token %}
+                {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        
+                        <h5 class="helptext">{{ field.label_tag }}</h5>
+                        
+                        {% if form.is_bound %}
+                            {% if field.errors %}
+                                {% render_field field class="form-control inputBox is-invalid" %}
+                                {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field field class="form-control inputBox is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field field class="form-control inputBox" %}
+                        {% endif %}
+
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <input class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zarejestruj się">
+            </form>
         </div>
-
-    </table>
+        
+        <div class="col py-2 d-flex flex-column">
+            <img src="{% static 'popcorn/images/logo.png' %}" class="img-fluid" alt="Responsive image">
+        </div>
+    </div>
+</div>
 {% endblock %}
