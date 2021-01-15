@@ -107,10 +107,9 @@ class RecipeManager(models.Manager):
         """
         Breaks a list up into a list of lists of size <chunk_length>
         """
-        clen = int(chunk_length)
         i = iter(self.get_best_recipes(amount))
         while True:
-            chunk = list(itertools.islice(i, clen))
+            chunk = list(itertools.islice(i, chunk_length))
             if chunk:
                 yield chunk
             else:
