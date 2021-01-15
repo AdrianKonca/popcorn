@@ -105,6 +105,7 @@
                         <hr>
                     {% endfor %}
                 </ol>
+
                 <!--TODO: Add categories -->
                 {% for tag in recipe.categories.all %}
                     <a href={% url 'category' tag.id %}> {{ tag }}</a>
