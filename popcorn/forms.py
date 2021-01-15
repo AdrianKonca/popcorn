@@ -24,14 +24,13 @@ class CategoriesModelChoiceIterator(forms.models.ModelChoiceIterator):
 class CategoriesField(forms.ModelMultipleChoiceField):
     iterator = CategoriesModelChoiceIterator
 
+
 class CheckboxSelectMultipleCustom(forms.CheckboxSelectMultiple):
     template_name = 'popcorn/multiple_input.html'
     option_template_name = 'popcorn/input_option.html'
 
+
 class RecipeForm(forms.ModelForm):
-    # name = forms.CharField()
-    # difficulty = forms.ChoiceField()
-    # recipe = SummernoteTextFormField()
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
         
@@ -106,6 +105,7 @@ class UserRegistrationForm(RegistrationForm):
             "password1",
             "password2",
         ]
+
 
 class EmailChangeForm(forms.Form):
     """
