@@ -5,8 +5,7 @@
     <ul>
         {% for c in categories %}
             <li>
-{#                <a href=" {% url 'c' c.slug %}">{{ r.name }}</a> #}
-                <a>{{ c.name }} : {{ c.get_tag_display }}</a>
+                <a><a href="{{ c.id }}">{{ c.name }} </a>: {{ c.get_tag_display }}</a>
                 <br>
                 {% if c.image %}
                     <img src="{{ c.image.url }}" style="width: 500px">

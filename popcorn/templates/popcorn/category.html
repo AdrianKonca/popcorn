@@ -1,0 +1,39 @@
+{% extends "popcorn/base.html" %}
+{% block title %}Strona główna{% endblock %}
+
+{% block content %}
+
+    <div class="container my-3">
+        <h2 class="naglowek my-5 cstm-shadow">Przepisy w danej kategorii:</h2>
+        <div class="card-deck">
+            {% for r in recipes %}
+                <div class="card">
+                    <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
+                    <div class="card-body">
+                        <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
+{#                        <a href="#" class="card-subtitle card-link">Kategoria</a>#}
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div class="py-2">
+                            <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
+                            <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                        </div>
+                        <div class="py-2">
+                            <button type="button" class="btn btn-warning">Zapisz</button>
+                        </div>
+                    </div>
+                    <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="my-5 btn classic-btn cstm-shadow btn-lg btn-block" type="submit">Pokaż więcej przepisów
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+            </svg>
+        </button>
+    </div>
+
+
+{% endblock %}

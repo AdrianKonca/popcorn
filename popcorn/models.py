@@ -1,13 +1,14 @@
-from django.contrib.auth.models import AbstractUser, AbstractBaseUser
-from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from django.utils.text import slugify
-from django.core.exceptions import ValidationError
-from vote.models import VoteModel
-from django.utils import timezone
-
 import datetime
+
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils import timezone
+from django.utils.text import slugify
+from vote.models import VoteModel
+
+
 # TODO: Add validators in different areas (images), but research them first
 # TODO: Research https://django-simple-history.readthedocs.io for approval history
 # TODO: Add convertion of images uploaded by users that are not jpeg's to jpeg's
@@ -23,6 +24,7 @@ def validate_recipe_icon(image):
         if file_size > 1024 * 1024 * limit_mb:
             raise ValidationError("Max size of file is {} MB".format(limit_mb))
 
+
 class User(AbstractUser):
     newsletter_signup = models.BinaryField(blank=True, null=True)
     blocked_on = models.DateTimeField(blank=True, null=True)
@@ -33,12 +35,13 @@ class User(AbstractUser):
     deleted_by = models.ForeignKey("User", on_delete=models.SET_NULL, null=True, related_name='deleted_users',
                                    blank=True)
 
+
 class Category(models.Model):
     class Tag(models.IntegerChoices):
-        PREPARATION_TIME = 1, ('Czasowa') #less than 30 minutes, 30-120 etc.
-        MEAL_TIME = 2, ('Pora') #breakfast, dinner etc.
-        CUISINE_TYPE = 3, ('Rodzaj') #vegan, normal, vegetarian etc.
-        CATEGORY = 4, ('Kategoria') #all other
+        PREPARATION_TIME = 1, ('Czasowa')  # less than 30 minutes, 30-120 etc.
+        MEAL_TIME = 2, ('Pora')  # breakfast, dinner etc.
+        CUISINE_TYPE = 3, ('Rodzaj')  # vegan, normal, vegetarian etc.
+        CATEGORY = 4, ('Kategoria')  # all other
 
     name = models.CharField(max_length=120)
     image = models.ImageField(upload_to='categories/')
@@ -46,6 +49,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class VoteUtilities():
     ACTIONS = {'up': 0, 'down': 1, 0: 'up', 1: 'down'}
@@ -57,16 +61,18 @@ class VoteUtilities():
             return self.ACTIONS[vote.action]
         return self.NONE_ACTION
 
+
 class RecipeManager(models.Manager):
 
     def get_lastweek(self, amount=3):
-        recipes = list(Recipe.objects.filter(created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by('-vote_score'))
-        count = len(recipes)        
+        recipes = list(
+            Recipe.objects.filter(created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by('-vote_score'))
+        count = len(recipes)
         if count == 0:
             return []
         if count < amount:
             for i in range(count, amount):
-                recipes.append(recipes[i%count])
+                recipes.append(recipes[i % count])
         return recipes[:amount]
 
     def get_best_recipes(self, amount=3):
@@ -76,7 +82,7 @@ class RecipeManager(models.Manager):
             return []
         if count < amount:
             for i in range(count, amount):
-                recipes.append(recipes[i%count])
+                recipes.append(recipes[i % count])
         return recipes[:amount]
 
     def get_proposed(self, amount=3):
@@ -86,8 +92,9 @@ class RecipeManager(models.Manager):
             return []
         if count < amount:
             for i in range(count, amount):
-                recipes.append(recipes[i%count])
+                recipes.append(recipes[i % count])
         return recipes[:amount]
+
 
 class Recipe(VoteModel, models.Model, VoteUtilities):
     class Difficulty(models.IntegerChoices):
@@ -129,6 +136,7 @@ class Recipe(VoteModel, models.Model, VoteUtilities):
         self.slug = slugify(self.name + " " + str(self.id), allow_unicode=False)
         super().save(*args, **kwargs)
 
+
 class Comment(VoteModel, models.Model, VoteUtilities):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='authored_comments')
     content = models.TextField()
@@ -141,9 +149,11 @@ class Comment(VoteModel, models.Model, VoteUtilities):
     def is_deleted(self):
         return self.deleted_on is not None
 
+
 class Measurment(models.Model):
     full_name = models.CharField(max_length=120)
     short_name = models.CharField(max_length=6)
+
 
 class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)

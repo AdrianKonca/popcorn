@@ -177,3 +177,7 @@ def email_change(request):
             form.save()
             return HttpResponseRedirect("/accounts/profile/")
     return render(request, 'registration/change_email.html', {'form': form})
+
+
+def category_viev(request, i=None):
+    return render(request, 'popcorn/category.html', {'recipes': Recipe.objects.filter(categories=i)})
