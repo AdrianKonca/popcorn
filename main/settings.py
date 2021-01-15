@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_summernote',
     'vote',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

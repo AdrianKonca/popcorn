@@ -73,9 +73,17 @@ class CommentForm(forms.ModelForm):
 
 
 class UserRegistrationForm(RegistrationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+
     class Meta(RegistrationForm.Meta):
         model = User
-
+        fields = [
+            User.USERNAME_FIELD,
+            User.get_email_field_name(),
+            "password1",
+            "password2",
+        ]
 
 class EmailChangeForm(forms.Form):
     """
