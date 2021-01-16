@@ -52,5 +52,6 @@ in Django.
 ### Copyrights
 
 This software includes the django-registration-defaults Copyright (c) 2010 Charlie DeTar
+
 - https://github.com/yourcelf/django-registration-defaults
-with changes made by https://github.com/dfrankow/django-registration-defaults for django 3.x
+  with changes made by https://github.com/dfrankow/django-registration-defaults for django 3.x
