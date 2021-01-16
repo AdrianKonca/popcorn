@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django_registration.forms import RegistrationForm
 from django_summernote.widgets import SummernoteWidget
-
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Recipe, User, Comment, Category
 
 
@@ -33,9 +33,6 @@ class CheckboxSelectMultipleCustom(forms.CheckboxSelectMultiple):
 
 
 class RecipeForm(forms.ModelForm):
-    # name = forms.CharField()
-    # difficulty = forms.ChoiceField()
-    # recipe = SummernoteTextFormField()
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
 
@@ -111,6 +108,13 @@ class UserRegistrationForm(RegistrationForm):
             "password1",
             "password2",
         ]
+
+
+class LoginForm(AuthenticationForm):
+    remember_me = forms.BooleanField(label=_("Remember me"), required=False)  # and add the remember_me field
+    class Meta():
+        pass
+        labels = {'username': _("Username")}
 
 
 class EmailChangeForm(forms.Form):

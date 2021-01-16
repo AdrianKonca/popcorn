@@ -2,15 +2,26 @@ import itertools
 import json
 
 from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, reverse
 from django.utils import timezone
 from django.views import generic
 
-from .forms import RecipeForm, CommentForm, EmailChangeForm
+from .forms import RecipeForm, CommentForm, EmailChangeForm, LoginForm
 from .models import Recipe, Category, Comment
 
+class LoginViewWithRememberMe(LoginView):
+     form_class = LoginForm
+
+     def form_valid(self, form):
+
+        remember_me = form.cleaned_data['remember_me']  # get remember me data from cleaned_data of form
+        if not remember_me:
+             self.request.session.set_expiry(0)  # if remember me is 
+             self.request.session.modified = True
+        return super(LoginViewWithRememberMe, self).form_valid(form)
 
 def chunks(value, chunk_length=3):
     clen = int(chunk_length)
