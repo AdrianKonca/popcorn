@@ -80,7 +80,7 @@
             <h2 class="naglowek my-5 cstm-shadow">Nowe przepisy w tym tygodniu:</h2>
             <div class="card-deck">
                 {% for r in recipes %}
-                    <div class="card">
+                    <div class="card p-3">
                         <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
                         <div class="card-body">
                             <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
@@ -114,7 +114,7 @@
             <h2 class="naglowek my-5 cstm-shadow">Polecane dla ciebie:</h2>
             <div class="card-deck">
                 {% for r in proposed %}
-                    <div class="card">
+                    <div class="card p-3">
                         <img class="card-img-top center-cropped" src={{ r.icon.url }}>
                         <div class="card-body">
                             <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
