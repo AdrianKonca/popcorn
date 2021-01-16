@@ -5,7 +5,7 @@
     <div class="container my-3">
         <h2 class="naglowek my-5 cstm-shadow">Najlepsze przepisy w tym tygodniu:</h2>
         <!--Carousel Wrapper-->
-        <div id="carousel-example-1z" class="carousel slide  z-depth-1-half" data-ride="carousel">
+        <div id="carousel-example-1z" class="carousel slide  z-depth-1-half" data-ride="carousel" style="height: 425px">
             <!--Indicators-->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -27,9 +27,9 @@
                         <div class="col-sm justify-content-center top-buffer align-self-top">
                             <img class="test-img mx-auto d-block" src={{ r.icon.url }}>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-sm top-buffer">
                             <div class="card-header">Data dodania: {{ r.created_on }}</div>
-                            <div class="row">
+                            <div class="row top-buffer">
                                 <div class="col-sm">
                                     <h6 class="text-muted">czas: {{ r.preparation_time }} min.</h6>
                                 </div>
@@ -49,7 +49,7 @@
                                     <a href={% url 'category' tag.id %}> {{ tag }}</a>
                                 {% endfor %}
                                 <h3 class="card-title">{{ r.name }}</h3>
-                                <h5>Nazwa autora</h5>
+                                <h5>{{ r.author}}</h5>
                                 <div>{{ r.content|safe }}</div>
 
                             </div>
@@ -75,11 +75,12 @@
             </div>
             <!--/.Carousel Wrapper-->
         </div>
+
         <div class="container my-3">
             <h2 class="naglowek my-5 cstm-shadow">Nowe przepisy w tym tygodniu:</h2>
             <div class="card-deck">
                 {% for r in recipes %}
-                    <div class="card">
+                    <div class="card p-3">
                         <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
                         <div class="card-body">
                             <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
@@ -113,7 +114,7 @@
             <h2 class="naglowek my-5 cstm-shadow">Polecane dla ciebie:</h2>
             <div class="card-deck">
                 {% for r in proposed %}
-                    <div class="card">
+                    <div class="card p-3">
                         <img class="card-img-top center-cropped" src={{ r.icon.url }}>
                         <div class="card-body">
                             <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
@@ -143,5 +144,4 @@
                 </svg>
             </button>
         </div>
-    </div>
 {% endblock %}

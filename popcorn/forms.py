@@ -5,6 +5,7 @@ from django_summernote.widgets import SummernoteWidget
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Recipe, User, Comment, Category
 
+
 class CategoriesModelChoiceIterator(forms.models.ModelChoiceIterator):
     def __iter__(self):
         group = ""
@@ -21,6 +22,7 @@ class CategoriesModelChoiceIterator(forms.models.ModelChoiceIterator):
                 subgroup.append((category.id, category.name))
         yield (group, subgroup)
 
+
 class CategoriesField(forms.ModelMultipleChoiceField):
     iterator = CategoriesModelChoiceIterator
 
@@ -33,13 +35,14 @@ class CheckboxSelectMultipleCustom(forms.CheckboxSelectMultiple):
 class RecipeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
-        
+
         self.fields['categories'].label = 'Kategorie'
 
         if self.instance:
             self.fields['categories'].initial = None
 
-    categories = CategoriesField(queryset=Category.objects.all(), widget = forms.CheckboxSelectMultiple(attrs={'class': 'my-class'}))
+    categories = CategoriesField(queryset=Category.objects.all(),
+                                 widget=forms.CheckboxSelectMultiple(attrs={'class': 'my-class'}))
 
     class Meta:
         model = Recipe

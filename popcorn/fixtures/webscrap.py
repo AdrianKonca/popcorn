@@ -1,10 +1,11 @@
-from urllib.request import urlopen as uReq
-from bs4 import BeautifulSoup as soup
-from slugify import slugify
-from datetime import datetime
 import copy
 import json
 import urllib.request
+from datetime import datetime
+from urllib.request import urlopen as uReq
+
+from bs4 import BeautifulSoup as soup
+from slugify import slugify
 
 debug = False
 
@@ -89,8 +90,10 @@ kuchnia_domowa_urls = ['https://www.kuchnia-domowa.pl/przepisy/dania-glowne/469-
 
 recipes = []
 
+
 def p(phrase):
     return '<p>' + phrase + '</p>'
+
 
 def przyslij_przepis(pk_val):
     caterogy = 1
@@ -155,6 +158,7 @@ def przyslij_przepis(pk_val):
 
         recipes.append(current_recipe)
 
+
 def smaker(pk_val):
     category = 1
     for i in range(len(smaker_urls)):
@@ -170,7 +174,7 @@ def smaker(pk_val):
             print(recipe_title)
 
         # save recipe image
-        container = page_soup.findAll('div', {'class' : 'image_wrap'})
+        container = page_soup.findAll('div', {'class': 'image_wrap'})
         recipe_image_link = container[0].img['src']
         recipe_image_link = 'http:' + recipe_image_link
         urllib.request.urlretrieve(recipe_image_link, slugify(recipe_title) + '.jpeg')
@@ -188,7 +192,7 @@ def smaker(pk_val):
             print(ingredients)
 
         # get recipe description
-        container = page_soup.findAll('div', {'itemprop' : 'step'})
+        container = page_soup.findAll('div', {'itemprop': 'step'})
         recipe_description = container[0].text
         recipe_description = recipe_description.replace('Przygotowanie', '')
         recipe_description = recipe_description.lstrip()
@@ -215,6 +219,7 @@ def smaker(pk_val):
 
         recipes.append(current_recipe)
 
+
 def kuchnia_domowa(pk_val):
     category = 1
     for i in range(len(kuchnia_domowa_urls)):
@@ -239,14 +244,14 @@ def kuchnia_domowa(pk_val):
             print(recipe_image_link)
 
         # get recipe ingredients
-        container = page_soup.findAll('div', {'id' : 'recipe-ingredients'})
+        container = page_soup.findAll('div', {'id': 'recipe-ingredients'})
         ingredients = container[0].text
         ingredients = ingredients.strip()
         if debug:
             print(ingredients)
 
         # get recipe description
-        container = page_soup.findAll('div', {'id' : 'recipe-instructions'})
+        container = page_soup.findAll('div', {'id': 'recipe-instructions'})
         recipe_description = container[0].text
         recipe_description = recipe_description.strip()
         if debug:
@@ -270,6 +275,7 @@ def kuchnia_domowa(pk_val):
         category += 1
 
         recipes.append(current_recipe)
+
 
 przyslij_przepis(1)
 smaker(17)
