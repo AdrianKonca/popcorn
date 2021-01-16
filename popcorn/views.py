@@ -169,7 +169,7 @@ def post_comment(request, slug):
                                            'vote_status': recipe.get_vote_status(request.user)})
 
 
-def userpage(request):
+def user_page(request):
     user = request.user
     if not user.is_authenticated:
         return render(request, 'popcorn/unauthorized.html')
