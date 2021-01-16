@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-15 09:50+0100\n"
+"POT-Creation-Date: 2021-01-15 22:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,6 +227,38 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: .\popcorn\forms.py:111
+msgid "Remember me"
+msgstr "Zapamiętaj mnie"
+
+#: .\popcorn\forms.py:114
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: .\popcorn\forms.py:123
+msgid "Your old password was entered incorrectly. Please enter it again."
+msgstr "Wprowadziłeś złe hasło. Wprowadź je ponownie."
+
+#: .\popcorn\forms.py:124
+msgid "The two email addresses fields didn't match."
+msgstr "Podane adresy różnią się od siebie."
+
+#: .\popcorn\forms.py:125
+msgid "The email address is the same as the one already defined."
+msgstr "Adres mailowy który został podany jest taki sam jak obecny."
+
+#: .\popcorn\forms.py:129
+msgid "Old password"
+msgstr "Stare hasło"
+
+#: .\popcorn\forms.py:135
+msgid "New email address"
+msgstr "Nowy adres mailowy"
+
+#: .\popcorn\forms.py:140
+msgid "New email address confirmation"
+msgstr "Potwierdzenie nowego adresu mailowego"
+
 #: .\popcorn\templates\django_registration\activation_complete.html:3
 msgid "Activation complete"
 msgstr ""
@@ -282,16 +314,10 @@ msgid ""
 "account."
 msgstr ""
 
-#: .\popcorn\templates\django_registration\registration_form.html:24
-msgid ""
-"<li>Your password can’t be too similar to your other personal information.</"
-"li>\n"
-"                    <li>Your password must contain at least 8 characters.</"
-"li>\n"
-"                    <li>Your password can’t be a commonly used password.</"
-"li>\n"
-"                    <li>Your password can’t be entirely numeric.</li>"
-msgstr ""
+#: .\popcorn\templates\registration\change_email.html:3
+#: .\popcorn\templates\registration\change_email.html:9
+msgid "Change email"
+msgstr "Zmień email"
 
 #: .\popcorn\templates\registration\logged_out.html:8
 msgid "Thanks for spending some quality time with the website today."
@@ -305,26 +331,31 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: .\popcorn\templates\registration\login.html:3
+#: .\popcorn\templates\registration\login.html:4
+msgid "Login page"
+msgstr "Strona logowania"
+
+#: .\popcorn\templates\registration\login.html:12
+#, fuzzy
+#| msgid "Login"
+msgctxt "box title"
 msgid "Login"
-msgstr ""
+msgstr "Logowanie"
 
-#: .\popcorn\templates\registration\login.html:11
-#: .\popcorn\templates\registration\login.html:17
-#, python-format
-msgid "%(error)s"
-msgstr ""
+#: .\popcorn\templates\registration\login.html:33
+#, fuzzy
+#| msgid "Login"
+msgctxt "Login button"
+msgid "Login"
+msgstr "Zaloguj się"
 
-#: .\popcorn\templates\registration\login.html:43
-msgid "login"
-msgstr ""
+#: .\popcorn\templates\registration\login.html:41
+#: .\popcorn\templates\registration\password_reset_form.html:3
+#: .\popcorn\templates\registration\password_reset_form.html:12
+msgid "Reset password"
+msgstr "Zresetuj hasło"
 
-#: .\popcorn\templates\registration\login.html:73
-#, python-format
-msgid "<a href=\"%(auth_pwd_reset_url)s\">Forgot your password?</a>"
-msgstr ""
-
-#: .\popcorn\templates\registration\login.html:78
+#: .\popcorn\templates\registration\login.html:66
 #, python-format
 msgid "<a href=\"%(register_url)s\">Need an account</a>?"
 msgstr ""
@@ -370,7 +401,7 @@ msgstr ""
 msgid "Enter your new password below to reset your password:"
 msgstr ""
 
-#: .\popcorn\templates\registration\password_reset_confirm.html:12
+#: .\popcorn\templates\registration\password_reset_confirm.html:11
 msgid "Set password"
 msgstr ""
 
@@ -411,11 +442,6 @@ msgid ""
 "    %(site_name)s Management\n"
 msgstr ""
 
-#: .\popcorn\templates\registration\password_reset_form.html:3
-#: .\popcorn\templates\registration\password_reset_form.html:12
-msgid "Reset password"
-msgstr ""
-
 #: .\popcorn\templates\registration\password_reset_form.html:4
 msgid ""
 "\n"
@@ -423,3 +449,5 @@ msgid ""
 "you\n"
 "    instructions for creating a new one."
 msgstr ""
+"\n"
+"    Zapomniałeś hasła? Wprowadź adres na który założyłeś konto poniżej, a wyślemy Ci instrukcję jak je zresetować."
