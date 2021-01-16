@@ -45,9 +45,7 @@ in Django.
 ### Todos
 
 - Fix user page
-- Fix category page
 - Fix reset passwort page
-- Fix js in main page
 
 ### Copyrights
 
