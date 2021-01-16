@@ -1,5 +1,4 @@
 import datetime
-import itertools
 
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.contrib.contenttypes.models import ContentType
@@ -102,18 +101,6 @@ class RecipeManager(models.Manager):
             for i in range(count, amount):
                 recipes.append(recipes[i % count])
         return recipes[:amount]
-
-    def get_in_chunks_best_recipes(self, amount, chunk_length):
-        """
-        Breaks a list up into a list of lists of size <chunk_length>
-        """
-        i = iter(self.get_best_recipes(amount))
-        while True:
-            chunk = list(itertools.islice(i, chunk_length))
-            if chunk:
-                yield chunk
-            else:
-                break
 
 
 class Recipe(VoteModel, models.Model, VoteUtilities):

@@ -24,16 +24,6 @@ class LoginViewWithRememberMe(LoginView):
         return super(LoginViewWithRememberMe, self).form_valid(form)
 
 
-def chunks(value, chunk_length=3):
-    clen = int(chunk_length)
-    i = iter(value)
-    while True:
-        chunk = list(itertools.islice(i, clen))
-        if chunk:
-            yield chunk
-        else:
-            break
-
 
 def index(request):
     return render(request, 'popcorn/main_page.html',
@@ -184,7 +174,7 @@ def userpage(request):
     if not user.is_authenticated:
         return render(request, 'popcorn/unauthorized.html')
     return render(request, 'popcorn/user_page.html', {'user': user,
-                                                      'recipes': chunks(Recipe.objects.filter(author=user)),
+                                                      'recipes': Recipe.objects.filter(author=user),
                                                       'user_days_from_registration': (
                                                               timezone.now() - user.date_joined).days})
 
@@ -204,10 +194,10 @@ def email_change(request):
 
 def category_viev(request, i=None):
     get_object_or_404(Category, id=i)
-    lists = chunks(Recipe.objects.filter(categories=i).order_by('-vote_score'))
+    lists = Recipe.objects.filter(categories=i).order_by('-vote_score')
     return render(request, 'popcorn/category.html', {'recipes': lists})
 
 
 def all_recipes(request):
-    lists = Recipe.objects.get_in_chunks_best_recipes(0, 3)
+    lists = Recipe.objects.get_best_recipes(0)
     return render(request, 'popcorn/recipes.html', {'recipes': lists})
