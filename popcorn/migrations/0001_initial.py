@@ -94,7 +94,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=120)),
                 ('content', models.TextField()),
                 (
-                'icon', models.ImageField(upload_to='recipes_icons', validators=[popcorn.models.validate_recipe_icon])),
+                    'icon',
+                    models.ImageField(upload_to='recipes_icons', validators=[popcorn.models.validate_recipe_icon])),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('last_modified', models.DateTimeField(auto_now=True)),
                 ('preparation_time', models.PositiveIntegerField()),

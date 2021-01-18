@@ -49,7 +49,7 @@
                                     <a href={% url 'category' tag.id %}> {{ tag }}</a>
                                 {% endfor %}
                                 <h3 class="card-title">{{ r.name }}</h3>
-                                <h5>{{ r.author}}</h5>
+                                <h5>{{ r.author }}</h5>
                                 <div>{{ r.content|safe }}</div>
 
                             </div>
@@ -80,24 +80,23 @@
             <h2 class="naglowek my-5 cstm-shadow">Nowe przepisy w tym tygodniu:</h2>
             <div class="card-deck">
                 {% for r in recipes %}
-                    <div class="card p-3">
-                        <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
-                        <div class="card-body">
-                            <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
-                            {% for tag in r.categories.all %}
-                                <a href={% url 'category' tag.id %}> {{ tag }}</a>
-                            {% endfor %}
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <div class="py-2">
-                                <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
-                                <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                    <div class="col mt-3">
+                        <div class="card h-100">
+                            <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
+                            <div class="card-body">
+                                <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
                             </div>
-                            <div class="py-2">
-                                <button type="button" class="btn btn-warning">Zapisz</button>
+                            <div class="card-footer d-flex justify-content-between">
+                                <div class="py-2">
+                                    <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
+                                    <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                                </div>
+                                <div class="py-2">
+                                    <button type="button" class="btn btn-warning">Zapisz</button>
+                                </div>
                             </div>
+                            <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
                         </div>
-                        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
                     </div>
                 {% endfor %}
             </div>
@@ -110,31 +109,32 @@
                 </svg>
             </button>
         </div>
+
         <div class="container my-3 ">
             <h2 class="naglowek my-5 cstm-shadow">Polecane dla ciebie:</h2>
             <div class="card-deck">
                 {% for r in proposed %}
-                    <div class="card p-3">
-                        <img class="card-img-top center-cropped" src={{ r.icon.url }}>
-                        <div class="card-body">
-                            <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
-                            {% for tag in r.categories.all %}
-                                <a href={% url 'category' tag.id %}> {{ tag }}</a>
-                            {% endfor %}
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <div class="py-2">
-                                <h6 class="text-muted text-center">punktacja: {{ r.vote_score }}</h6>
-                                <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                    <div class="col mt-3">
+                        <div class="card h-100">
+                            <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
+                            <div class="card-body">
+                                <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
                             </div>
-                            <div class="py-2">
-                                <button type="button" class="btn btn-warning">Zapisz</button>
+                            <div class="card-footer d-flex justify-content-between">
+                                <div class="py-2">
+                                    <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
+                                    <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                                </div>
+                                <div class="py-2">
+                                    <button type="button" class="btn btn-warning">Zapisz</button>
+                                </div>
                             </div>
+                            <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
                         </div>
-                        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
                     </div>
                 {% endfor %}
             </div>
+
             <button class="my-5 btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
                     onclick="location.href = '{% url 'all_recipes' %}'">Pokaż więcej przepisów
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
@@ -144,4 +144,5 @@
                 </svg>
             </button>
         </div>
+
 {% endblock %}

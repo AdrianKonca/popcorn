@@ -29,9 +29,10 @@ urlpatterns = [
     path('comments/vote/<int:pk>', views.vote_comment, name='vote_comment'),  # used on front-end
     path('categories/', views.CategoriesView.as_view(), name='categories'),
     path('categories/<int:i>', views.category_viev, name='category'),
-    path('accounts/profile/', views.userpage, name='user_page'),
+    path('accounts/profile/', views.user_page, name='user_page'),
     path('accounts/login/', views.LoginViewWithRememberMe.as_view(), name='login'),
-    path('accounts/register/', RegistrationView.as_view(form_class=UserRegistrationForm),name='django_registration_register'),
+    path('accounts/register/', RegistrationView.as_view(form_class=UserRegistrationForm),
+         name='django_registration_register'),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', views.logout_view, name='logout'),
