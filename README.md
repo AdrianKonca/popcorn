@@ -39,7 +39,7 @@ in Django.
 - Remember that you must create link all of the currently used applications, as the translations will get lost when
   regenerating the file!
 - Create localization files using `python manage.py makemessages --locale=pl`
-- To test transaction run `python manage.py compilemessages`
+- To test transaction run `python manage.py compilemessages`. If message error appears download necessary files from [here](https://mlocati.github.io/articles/gettext-iconv-windows.html) (for Windows)
 - After translating everything that needs translation you can commit the file.
 
 ### Todos
