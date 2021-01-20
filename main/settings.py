@@ -20,15 +20,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from main.app_secrets import SECRET_KEY
+from main.app_secrets import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['popcornzut.online']
 
 ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'popcornzut@gmail.com'
+
 ACCOUNT_EMAIL_VERIFICATION = "none"
 AUTH_USER_MODEL = 'popcorn.User'
 
@@ -46,6 +51,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'vote',
     'widget_tweaks',
+    'captcha',
 ]
 
 MIDDLEWARE = [
