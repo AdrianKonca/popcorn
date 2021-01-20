@@ -16,6 +16,8 @@ django-summernote = "*"
 mixer = "*"
 django-widget-tweaks = "*"
 django-recaptcha = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
