@@ -20,12 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from main.app_secrets import *
+SECRET_KEY = os.environ['POPCORN_SECRET_KEY']
+
+# V2
+RECAPTCHA_PUBLIC_KEY = os.environ['POPCORN_RECAPTCHA_PUBLIC_KEY']
+RECAPTCHA_PRIVATE_KEY = os.environ['POPCORN_RECAPTCHA_PRIVATE_KEY']
+
+# email password
+EMAIL_HOST_PASSWORD = os.environ['POPCORN_EMAIL_HOST_PASSWORD']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['popcornzut.online']
+ALLOWED_HOSTS = ['*']
 
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
