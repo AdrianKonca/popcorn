@@ -20,18 +20,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-IS_LOCAL = 'POPCORN_SECRET_KEY' in os.environ
+IS_LOCAL = not('POPCORN_SECRET_KEY' in os.environ)
 if IS_LOCAL:
+    from main.app_secrets import *
+else:
     SECRET_KEY = os.environ['POPCORN_SECRET_KEY']
-
     # V2
     RECAPTCHA_PUBLIC_KEY = os.environ['POPCORN_RECAPTCHA_PUBLIC_KEY']
     RECAPTCHA_PRIVATE_KEY = os.environ['POPCORN_RECAPTCHA_PRIVATE_KEY']
-
     # email password
     EMAIL_HOST_PASSWORD = os.environ['POPCORN_EMAIL_HOST_PASSWORD']
-else:
-    from app_secrets import *
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
