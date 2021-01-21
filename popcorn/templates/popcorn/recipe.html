@@ -5,10 +5,11 @@
 {% endblock %}
 {% block additional_js %}
     <script src="{% static 'popcorn/js/recipe.js' %}"></script>
+    <script src="https://kit.fontawesome.com/19f6d5cbbe.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}
-    <div class="card margin-big ">
+    <div class="card m-5">
         <div class="card-body">
             <div class="col">
                 {% if request.user == recipe.author %}
@@ -31,33 +32,32 @@
                 <!--TODO: Add scaling-->
                 {% if recipe.icon %}
                     <div class="span3">
-                        {#                        <div class="row">#}
-                        {#                            <div class="span3 food1">#}
                         <img src="{{ recipe.icon.url }}" class="img-fluid rounded mx-auto d-block">
-                        {#                            </div>#}
-                        {#                        </div>#}
                     </div>
                 {% endif %}
 
-                <!--TODO: Add ingredients -->
 
+                <!--TODO: Add ingredients -->
                 <!--TODO: Add voting-->
-                {% if user.is_authenticated %}
-                    {% if vote_status == 'up' %}
-                        <a class="nav-link vote vote-up" id="recipe-vote-button-up">Like</a>
-                        <a class="nav-link vote" id="recipe-vote-button-down">Unlike</a>
-                    {% elif vote_status == 'down' %}
-                        <a class="nav-link vote" id="recipe-vote-button-up">Like</a>
-                        <a class="nav-link vote vote-down" id="recipe-vote-button-down">Unlike</a>
+                <div class="text-center mt-5">
+                    {% if user.is_authenticated %}
+                        {% if vote_status == 'up' %}
+                            <i class="fas fa-arrow-up nav-link vote vote-up" id="recipe-vote-button-up"></i>
+                            <i class="fas fa-arrow-down nav-link vote" id="recipe-vote-button-down"></i>
+                        {% elif vote_status == 'down' %}
+                            <i class="fas fa-arrow-up nav-link vote" id="recipe-vote-button-up"></i>
+                            <i class="fas fa-arrow-down nav-link vote vote-down" id="recipe-vote-button-down"></i>
+                        {% else %}
+                            <i class="fas fa-arrow-up nav-link vote" id="recipe-vote-button-up"></i>
+                            <i class="fas fa-arrow-down nav-link vote" id="recipe-vote-button-down"></i>
+                        {% endif %}
                     {% else %}
-                        <a class="nav-link vote" id="recipe-vote-button-up">Like</a>
-                        <a class="nav-link vote" id="recipe-vote-button-down">Unlike</a>
+                        <h4>Chcesz głosować? <a href="{% url 'login' %}">Zaloguj się!</a></h4>
                     {% endif %}
-                {% else %}
-                    <h4>Chcesz głosować? <a href="{% url 'login' %}">Zaloguj się!</a></h4>
-                {% endif %}
-                <h4 class="text-center" id="recipe-vote-count">Głosy: {{ recipe.vote_score }}</h4>
-                <h4 class="text-center"></h4>
+                    <h4 class="text-center" id="recipe-vote-count">Głosy: {{ recipe.vote_score }}</h4>
+
+                </div>
+
 
                 <!--TODO: Add food icon-->
                 {{ recipe.content|safe }}
@@ -67,14 +67,12 @@
                     <form method="post" style="margin-top: 1.3em;">
                         {{ comment_form.as_p }}
                         {% csrf_token %}
-
                         <div class="col">
                             <div class="text-right">
                                 <button type="submit" class="btn classic-btn cstm-shadow btn-lg btn-block">Odpowiedz
                                 </button>
                             </div>
                         </div>
-
                     </form>
 
 
@@ -83,7 +81,7 @@
                 {% endif %}
 
                 <!--TODO: Add comments-->
-                <ol>
+                <div>
                     {% for c, status in comments %}
                         {% if c.author %}
                             <a><strong>Autor:</strong> {{ c.author }} </a>
@@ -93,21 +91,23 @@
                         <div class="text" id="comment-vote-count-{{ c.id }}">Głosy: {{ c.vote_score }}</div>
                         {% if user.is_authenticated %}
                             {% if status == 'up' %}
-                                <a class="nav-link vote vote-up" id="comment-vote-button-up-{{ c.id }}">Like</a>
-                                <a class="nav-link vote" id="comment-vote-button-down-{{ c.id }}">Unlike</a>
+                                <i class="fas fa-arrow-up nav-link vote vote-up"
+                                   id="comment-vote-button-up-{{ c.id }}"></i>
+                                <i class="fas fa-arrow-down nav-link vote" id="comment-vote-button-down-{{ c.id }}"></i>
                             {% elif status == 'down' %}
-                                <a class="nav-link vote" id="comment-vote-button-up-{{ c.id }}">Like</a>
-                                <a class="nav-link vote vote-down" id="comment-vote-button-down-{{ c.id }}">Unlike</a>
+                                <i class="fas fa-arrow-up nav-link vote" id="comment-vote-button-up-{{ c.id }}"></i>
+                                <i class="fas fa-arrow-down nav-link vote vote-down"
+                                   id="comment-vote-button-down-{{ c.id }}"></i>
                             {% else %}
-                                <a class="nav-link vote" id="comment-vote-button-up-{{ c.id }}">Like</a>
-                                <a class="nav-link vote" id="comment-vote-button-down-{{ c.id }}">Unlike</a>
+                                <i class="fas fa-arrow-up nav-link vote" id="comment-vote-button-up-{{ c.id }}"></i>
+                                <i class="fas fa-arrow-down nav-link vote" id="comment-vote-button-down-{{ c.id }}"></i>
                             {% endif %}
                         {% endif %}
                         <br>
                         <a>{{ c.content|safe }} </a>
                         <hr>
                     {% endfor %}
-                </ol>
+                </div>
 
                 <!--TODO: Add categories -->
                 {% for tag in recipe.categories.all %}

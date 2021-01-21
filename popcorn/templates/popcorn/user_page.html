@@ -21,7 +21,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-3 my-5 test">
+            <div class="col-xl-3 my-5">
                 <div class="card">
                     <div class="card-body">
                         <h2 class=" card-title naglowek cstm-shadow">Twoje Dane</h2>
@@ -54,13 +54,13 @@
                 </div>
             </div>
 
-            <div class="col-sm-9 test">
-                <div class="container my-3">
-                    <h2 class="naglowek my-5 cstm-shadow">Twoje Przepisy</h2>
-                    <div class="card-deck">
+            <div class="col-xl-9">
+                <div class="container-fluid mb-3">
+                    <h2 class="naglowek mt-5 cstm-shadow">Twoje przepisy:</h2>
+                    <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3">
                         {% for r in recipes %}
-                            <div class="col">
-                                <div class="card">
+                            <div class="col mt-3">
+                                <div class="card h-100">
                                     <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
                                     <div class="card-body">
                                         <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
@@ -80,6 +80,7 @@
                         {% endfor %}
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
