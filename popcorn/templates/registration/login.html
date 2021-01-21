@@ -6,10 +6,11 @@
     {% url 'password_reset' as auth_pwd_reset_url %}
     {% url 'django_registration_register' as register_url %}
 
-    <div class="container top-buffer-big">
-        <div class="row align-items-top">
-            <div class="col py-2">
-                <h2 class="top-buffer naglowek cstm-shadow">{% trans "Login" context "box title" %}</h2>
+
+    <div class="card-deck">
+        <div class="col">
+            <div class="card p-3 m-3">
+                <h2 class="naglowek cstm-shadow">{% trans "Login" context "box title" %}</h2>
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
                     {% for field in form.visible_fields %}
@@ -42,25 +43,24 @@
                         onclick="location.href = '{% url 'password_reset' %}'">{% trans "Reset password" %}
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
-                        <path
-                                d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="col py-2 d-flex flex-column">
-                <h2 class="naglowek top-buffer cstm-shadow">Nie masz konta?</h2>
-                <h5 class="mt-auto text-center">Slogan namawiający do założenia konta.</h5>
-                <button class="mt-auto btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
-                        onclick="location.href = '{{ register_url }}'">Zarejestruj się
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                                d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
                     </svg>
                 </button>
             </div>
         </div>
-
+        <div class="col">
+            <div class="card p-3 m-3">
+                <h2 class="naglowek cstm-shadow">Nie masz konta?</h2>
+                <h5 class="p-4 text-center">Załóż konto już dzisiaj.</h5>
+                <button class="mt-auto btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
+                        onclick="location.href = '{{ register_url }}'">Zarejestruj się
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 
     {% if settings.REGISTRATION_OPEN %}
