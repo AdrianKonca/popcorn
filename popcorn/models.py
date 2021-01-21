@@ -112,10 +112,10 @@ class Recipe(VoteModel, models.Model, VoteUtilities):
         VERY_DIFFICULT = 5, ('Bardzo trudna')
 
     id = models.AutoField(primary_key=True)
-    slug = models.SlugField(blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, max_length=130)
     name = models.CharField(max_length=120)
     content = models.TextField()
-    icon = models.ImageField(upload_to='recipes_icons', validators=[validate_recipe_icon])
+    icon = models.ImageField(upload_to='recipes_icons', validators=[validate_recipe_icon], max_length=250)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='authored_recipes', blank=True)
     categories = models.ManyToManyField(Category, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
