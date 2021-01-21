@@ -20,22 +20,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['POPCORN_SECRET_KEY']
+IS_LOCAL = 'POPCORN_SECRET_KEY' in os.environ
+if IS_LOCAL:
+    SECRET_KEY = os.environ['POPCORN_SECRET_KEY']
 
-# V2
-RECAPTCHA_PUBLIC_KEY = os.environ['POPCORN_RECAPTCHA_PUBLIC_KEY']
-RECAPTCHA_PRIVATE_KEY = os.environ['POPCORN_RECAPTCHA_PRIVATE_KEY']
+    # V2
+    RECAPTCHA_PUBLIC_KEY = os.environ['POPCORN_RECAPTCHA_PUBLIC_KEY']
+    RECAPTCHA_PRIVATE_KEY = os.environ['POPCORN_RECAPTCHA_PRIVATE_KEY']
 
-# email password
-EMAIL_HOST_PASSWORD = os.environ['POPCORN_EMAIL_HOST_PASSWORD']
-
+    # email password
+    EMAIL_HOST_PASSWORD = os.environ['POPCORN_EMAIL_HOST_PASSWORD']
+else:
+    from app_secrets import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+if IS_LOCAL:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
@@ -99,24 +105,24 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'de4hm97onsd0rh',
-        'HOST': 'ec2-34-248-148-63.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
-        'USER': 'baprdwxpobiqks',
-        'PASSWORD': os.environ['POPCORN_PGSQL_PASSWORD'],
-
+if "POPCORN_HEROKU" in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'de4hm97onsd0rh',
+            'HOST': 'ec2-34-248-148-63.eu-west-1.compute.amazonaws.com',
+            'PORT': '5432',
+            'USER': 'baprdwxpobiqks',
+            'PASSWORD': os.environ['POPCORN_PGSQL_PASSWORD'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -163,5 +169,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = "/media/"
 
-import django_heroku
-django_heroku.settings(locals())
+if not IS_LOCAL:
+    import django_heroku
+    django_heroku.settings(locals())
