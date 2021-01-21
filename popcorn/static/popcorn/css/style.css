@@ -69,16 +69,15 @@
 
 .vote {
     cursor: pointer;
-    background-color: #ffdfa8;
     border-style: none;
 }
 
 .vote-up {
-    background-color: rgb(180, 255, 41);
+    color: rgb(40, 255, 40);
 }
 
 .vote-down {
-    background-color: rgb(255, 112, 17);
+    color: rgb(255, 112, 17);
 }
 
 
@@ -135,15 +134,3 @@ footer {
 .categories-list-inner {
 
 }
-
-@media (max-width: 1200px) {
-    .test{
-        position: relative;
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        flex: none;
-        max-width: none;
-    }
-}
-
