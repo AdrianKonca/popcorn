@@ -7,8 +7,13 @@ and your address will be removed from our records.
 
 To activate this account, please click the following link within the next
 {{ expiration_days }} days:
-
-https://{{ siteurl }}{{ activation_key_url }}
+{% endblocktrans %}
+{% if request.is_secure %}
+https://{{ site.domain }}{{ activation_key_url }}
+{% else %}
+http://{{ site.domain }}{{ activation_key_url }}
+{% endif %}
+{% blocktrans with sitename=site.name %}
 
 Sincerely,
 {{ sitename }} Management
