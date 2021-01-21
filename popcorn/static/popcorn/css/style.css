@@ -135,3 +135,15 @@ footer {
 .categories-list-inner {
 
 }
+
+@media (max-width: 1200px) {
+    .test{
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        flex: none;
+        max-width: none;
+    }
+}
+
