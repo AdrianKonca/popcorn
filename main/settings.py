@@ -105,7 +105,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if "POPCORN_HEROKU" in os.environ:
+if "POPCORN_PGSQL_PASSWORD" in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
