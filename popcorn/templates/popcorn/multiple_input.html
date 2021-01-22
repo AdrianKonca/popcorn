@@ -1,17 +1,16 @@
 {% with id=widget.attrs.id %}
-    <ul {% if id %} id="{{ id }}"{% endif %} {% if widget.attrs.class %} class="categories-list-outer"{% endif %}>
         {% for group, options, index in widget.optgroups %}
             {% if group %}
-                <li>{{ group }}
-                <ul{% if id %} id="{{ id }}_{{ index }}"{% endif %} class="categories-list-inner">
+                <div><p>{{ group }}</p>
+                <div class="categories-list-inner" class="btn-group"
+                     role="group" aria-label="Basic checkbox toggle button group">
             {% endif %}
-            {% for option in options %}
-                <li>{% include option.template_name with widget=option %}</li>
-            {% endfor %}
-            {% if group %}
-                </ul>
-                </li>
-            {% endif %}
+        {% for option in options %}
+            {% include option.template_name with widget=option %}
         {% endfor %}
-    </ul>
+        {% if group %}
+            </div>
+            </div>
+        {% endif %}
+        {% endfor %}
 {% endwith %}

@@ -39,13 +39,14 @@ class RecipeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
 
-        self.fields['categories'].label = 'Kategorie'
+        # self.fields['categories'].label = 'Kategorie'
+        self.fields['categories'].label = ''
 
         if self.instance:
             self.fields['categories'].initial = None
 
     categories = CategoriesField(queryset=Category.objects.all(),
-                                 widget=forms.CheckboxSelectMultiple(attrs={'class': 'my-class'}))
+                                 widget=CheckboxSelectMultipleCustom(attrs={'class': 'my-class'}))
 
     class Meta:
         model = Recipe

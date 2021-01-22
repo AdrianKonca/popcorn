@@ -134,3 +134,27 @@ footer {
 .categories-list-inner {
 
 }
+
+.btn-outline-secondary {
+    color: #000000;
+    background-color: #dddcd1;
+    border-color: #d18c19;
+}
+
+.btn-check:active + .btn-outline-secondary, .btn-check:checked + .btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+    color: #fff;
+    background-color: #e39b24;
+    border-color: #e39b24;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #d18c19;
+    border-color: #d18c19;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show > .btn-outline-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #d18c19;
+    border-color: #d18c19;
+}
