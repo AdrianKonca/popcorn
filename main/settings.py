@@ -115,6 +115,8 @@ if "POPCORN_PGSQL_PASSWORD" in os.environ:
             'PASSWORD': os.environ['POPCORN_PGSQL_PASSWORD'],
         }
     }
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
 else:
     DATABASES = {
         'default': {
