@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% load static %}
+{% load add_css_class %}
 {% block title %}Rejestracja{% endblock %}
 {% block content %}
     <div class="container top-buffer-big">
@@ -9,27 +10,42 @@
 
         <div class="row">
             <div class="col py-2 d-flex flex-column">
+
                 <form method='post' action=''>
                     {% csrf_token %}
                     {% for field in form.visible_fields %}
                         <div class="form-group">
-                            <h5 class="helptext">{{ field.label }}</h5>
-                            {% comment %} {% if form.is_bound %} {% endcomment %}
-                            {% if field.errors %}
-                                {% render_field field class="form-control inputBox is-invalid" %}
-                                {% for error in field.errors %}
-                                    <div class="invalid-feedback">
-                                        {{ error }}
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {% render_field field class="form-control inputBox" %}
-                            {% endif %}
+                            {% if field.name != 'tos' %}
+                                <h5 class="helptext">{{ field.label }}</h5>
+                                {% if field.errors %}
+                                    {% render_field field class="form-control inputBox is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control inputBox" %}
+                                {% endif %}
 
-                            {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+
+                            {% else %}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        {{ field.label_tag|add_css_class:"is-invalid" }}
+                                        {% for error in field.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                    
+                                        {{ field.label_tag }}
+                                    {% endif %}
                             {% endif %}
-                            {% comment %} {% endif %} {% endcomment %}
                         </div>
                     {% endfor %}
                     <input class="btn classic-btn cstm-shadow btn-lg btn-block" type="submit" value="Zarejestruj się">
