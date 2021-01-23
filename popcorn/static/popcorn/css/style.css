@@ -2,6 +2,10 @@
     margin-top: 20px;
 }
 
+.bottom-buffer {
+    margin-bottom: 20px;
+}
+
 .naglowek {
     background-color: #ffba47;
     border-color: #707070;
@@ -65,16 +69,15 @@
 
 .vote {
     cursor: pointer;
-    background-color: #ffdfa8;
     border-style: none;
 }
 
 .vote-up {
-    background-color: rgb(180, 255, 41);
+    color: rgb(40, 255, 40);
 }
 
 .vote-down {
-    background-color: rgb(255, 112, 17);
+    color: rgb(255, 112, 17);
 }
 
 
@@ -130,4 +133,28 @@ footer {
 
 .categories-list-inner {
 
+}
+
+.btn-outline-secondary {
+    color: #000000;
+    background-color: #dddcd1;
+    border-color: #d18c19;
+}
+
+.btn-check:active + .btn-outline-secondary, .btn-check:checked + .btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+    color: #fff;
+    background-color: #e39b24;
+    border-color: #e39b24;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #d18c19;
+    border-color: #d18c19;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show > .btn-outline-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #d18c19;
+    border-color: #d18c19;
 }
