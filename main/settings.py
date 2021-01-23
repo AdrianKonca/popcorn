@@ -115,8 +115,6 @@ if "POPCORN_PGSQL_PASSWORD" in os.environ:
             'PASSWORD': os.environ['POPCORN_PGSQL_PASSWORD'],
         }
     }
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
 else:
     DATABASES = {
         'default': {
@@ -173,3 +171,6 @@ MEDIA_URL = "/media/"
 if not IS_LOCAL:
     import django_heroku
     django_heroku.settings(locals())
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+
