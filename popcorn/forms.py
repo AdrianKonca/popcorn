@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
-from django_registration.forms import RegistrationForm
+from django_registration.forms import RegistrationForm, RegistrationFormTermsOfService, RegistrationFormUniqueEmail
 from django_summernote.widgets import SummernoteWidget
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV3
@@ -99,7 +99,7 @@ class CommentForm(forms.ModelForm):
         labels = {'content': ''}
 
 
-class UserRegistrationForm(RegistrationForm):
+class UserRegistrationForm(RegistrationFormTermsOfService, RegistrationFormUniqueEmail):
     captcha = ReCaptchaField()
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
