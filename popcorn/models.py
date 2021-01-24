@@ -64,9 +64,9 @@ class VoteUtilities():
 
 class RecipeManager(models.Manager):
 
-    def get_lastweek(self, amount=3):
+    def get_lastweek(self, amount=6):
         recipes = list(
-            Recipe.objects.filter(created_on__gte=timezone.now() - datetime.timedelta(days=7)).order_by('-vote_score'))
+            Recipe.objects.filter(created_on__gte=timezone.now() - datetime.timedelta(days=14)).order_by('-vote_score'))
         count = len(recipes)
         if count == 0:
             return []
@@ -77,7 +77,7 @@ class RecipeManager(models.Manager):
                 recipes.append(recipes[i % count])
         return recipes[:amount]
 
-    def get_best_recipes(self, amount=3):
+    def get_best_recipes(self, amount=6):
         recipes = list(Recipe.objects.order_by('-vote_score'))
         count = len(recipes)
 
@@ -90,7 +90,7 @@ class RecipeManager(models.Manager):
                 recipes.append(recipes[i % count])
         return recipes[:amount]
 
-    def get_proposed(self, amount=3):
+    def get_proposed(self, amount=6):
         recipes = list(Recipe.objects.order_by('name'))
         count = len(recipes)
         if count == 0:
