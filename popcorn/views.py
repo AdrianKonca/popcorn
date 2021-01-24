@@ -8,9 +8,12 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render, reverse
 from django.utils import timezone
 from django.views import generic
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.utils.translation import gettext as _
 
 from .forms import RecipeForm, CommentForm, EmailChangeForm, LoginForm
-from .models import Recipe, Category, Comment
+from .models import Recipe, Category, Comment, NewsletterSignup
 
 
 class LoginViewWithRememberMe(LoginView):
@@ -32,11 +35,6 @@ def index(request):
                       'recipes': Recipe.objects.get_best_recipes(),
                       'proposed': Recipe.objects.get_proposed()
                   })
-
-
-def recipe(request):
-    return render(request, 'popcorn/recipe.html')
-
 
 class RecipeView(generic.DetailView):
     model = Recipe
@@ -123,6 +121,22 @@ def vote_comment(request, pk):
 
     comment = Comment.objects.get(pk=pk)
     return JsonResponse({'action': action_result, 'count': comment.vote_score})
+
+def signup_newsletter(request):
+    body = json.loads(request.body)
+    value = body['email']
+
+    try:
+        validate_email(value)
+    except ValidationError as e:
+        return JsonResponse({'result': "Failure", "message": _("Enter a valid email address.")})
+    
+    past_ns = NewsletterSignup.objects.filter(email=value)
+    if past_ns.count() != 0:
+        return JsonResponse({'result': "Failure", "message": _("This email address is already in use. Please supply a different email address")})
+    ns = NewsletterSignup(email=value)
+    ns.save()
+    return JsonResponse({'result': "Success", "message": _("Thank you for signing up.")})
 
 
 def post_comment(request, slug):

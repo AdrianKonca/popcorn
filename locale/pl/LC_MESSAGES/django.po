@@ -3,22 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-15 22:36+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-01-24 17:43+0100\n"
+"PO-Revision-Date: 2021-01-23 23:25+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #. Translators: If found as last label character, these punctuation
 #. characters will prevent the default label_suffix to be appended to the label
@@ -227,37 +227,45 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: .\popcorn\forms.py:111
+#: .\popcorn\forms.py:119
 msgid "Remember me"
 msgstr "Zapamiętaj mnie"
 
-#: .\popcorn\forms.py:114
+#: .\popcorn\forms.py:123
 msgid "Username"
 msgstr "Nazwa użytkownika"
 
-#: .\popcorn\forms.py:123
+#: .\popcorn\forms.py:132
 msgid "Your old password was entered incorrectly. Please enter it again."
 msgstr "Wprowadziłeś złe hasło. Wprowadź je ponownie."
 
-#: .\popcorn\forms.py:124
+#: .\popcorn\forms.py:133
 msgid "The two email addresses fields didn't match."
 msgstr "Podane adresy różnią się od siebie."
 
-#: .\popcorn\forms.py:125
+#: .\popcorn\forms.py:134
 msgid "The email address is the same as the one already defined."
 msgstr "Adres mailowy który został podany jest taki sam jak obecny."
 
-#: .\popcorn\forms.py:129
+#: .\popcorn\forms.py:138
 msgid "Old password"
 msgstr "Stare hasło"
 
-#: .\popcorn\forms.py:135
+#: .\popcorn\forms.py:144
 msgid "New email address"
 msgstr "Nowy adres mailowy"
 
-#: .\popcorn\forms.py:140
+#: .\popcorn\forms.py:149
 msgid "New email address confirmation"
 msgstr "Potwierdzenie nowego adresu mailowego"
+
+#: .\popcorn\templates\404.html:3 .\popcorn\templates\404.html:6
+msgid "Page not found"
+msgstr ""
+
+#: .\popcorn\templates\500.html:3 .\popcorn\templates\500.html:6
+msgid "Server error"
+msgstr ""
 
 #: .\popcorn\templates\django_registration\activation_complete.html:3
 msgid "Activation complete"
@@ -283,12 +291,29 @@ msgid ""
 "\n"
 "To activate this account, please click the following link within the next\n"
 "%(expiration_days)s days:\n"
+msgstr ""
 "\n"
-"http://%(siteurl)s%(activation_key_url)s\n"
+"Ty (lub ktoś podszywający się pod Ciebie) poprosiłeś o zarejestrowanie konta "
+"na stronie\n"
+"%(sitename)s.  Jeśli to nie byłeś Ty, prosimy zignorować ten e-mail\n"
+"a Twój adres zostanie usunięty z naszych rejestrów.\n"
+"\n"
+"Aby aktywować to konto, proszę kliknąć na poniższy link w ciągu "
+"najbliższych\n"
+"%(expiration_days)s dni:\n"
+
+#: .\popcorn\templates\django_registration\activation_email_body.txt:16
+#, python-format
+msgid ""
+"\n"
 "\n"
 "Sincerely,\n"
 "%(sitename)s Management\n"
 msgstr ""
+"\n"
+"\n"
+"Z poważaniem,\n"
+"Zarząd %(sitename)s\n"
 
 #: .\popcorn\templates\django_registration\activation_email_subject.txt:1
 #, python-format
@@ -314,8 +339,19 @@ msgid ""
 "account."
 msgstr ""
 
-#: .\popcorn\templates\registration\change_email.html:3
-#: .\popcorn\templates\registration\change_email.html:9
+#: .\popcorn\templates\popcorn\base.html:87
+msgid ""
+"The latest on food trends, healthy recipes, holiday baking ideas, and easy-"
+"to-make meals plus more. Sign up today and get newsletters delivered to your "
+"inbox for free!"
+msgstr ""
+"Najnowsze trendy żywieniowe, zdrowe przepisy, pomysły na świąteczne wypieki "
+"i łatwe do zrobienia potrawy oraz wiele innych. Zapisz się już dziś i "
+"otrzymuj przepisy dostarczane do Twojej skrzynki pocztowej za darmo!"
+
+#: .\popcorn\templates\registration\change_email.html:4
+#: .\popcorn\templates\registration\change_email.html:11
+#: .\popcorn\templates\registration\change_email.html:35
 msgid "Change email"
 msgstr "Zmień email"
 
@@ -331,31 +367,14 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: .\popcorn\templates\registration\login.html:4
-msgid "Login page"
-msgstr "Strona logowania"
-
-#: .\popcorn\templates\registration\login.html:12
-#, fuzzy
-#| msgid "Login"
-msgctxt "box title"
-msgid "Login"
-msgstr "Logowanie"
-
-#: .\popcorn\templates\registration\login.html:33
-#, fuzzy
-#| msgid "Login"
-msgctxt "Login button"
-msgid "Login"
-msgstr "Zaloguj się"
-
-#: .\popcorn\templates\registration\login.html:41
-#: .\popcorn\templates\registration\password_reset_form.html:3
-#: .\popcorn\templates\registration\password_reset_form.html:12
+#: .\popcorn\templates\registration\login.html:43
+#: .\popcorn\templates\registration\password_reset_form.html:4
+#: .\popcorn\templates\registration\password_reset_form.html:9
+#: .\popcorn\templates\registration\password_reset_form.html:33
 msgid "Reset password"
 msgstr "Zresetuj hasło"
 
-#: .\popcorn\templates\registration\login.html:66
+#: .\popcorn\templates\registration\login.html:67
 #, python-format
 msgid "<a href=\"%(register_url)s\">Need an account</a>?"
 msgstr ""
@@ -370,14 +389,15 @@ msgstr ""
 
 #: .\popcorn\templates\registration\password_change_done.html:3
 msgid "Password changed"
-msgstr ""
+msgstr "Hasło zmienione"
 
 #: .\popcorn\templates\registration\password_change_done.html:5
 msgid "Password successfully changed!"
-msgstr ""
+msgstr "Hasło zostało zmienione pomyślnie!"
 
-#: .\popcorn\templates\registration\password_change_form.html:3
-#: .\popcorn\templates\registration\password_change_form.html:10
+#: .\popcorn\templates\registration\password_change_form.html:4
+#: .\popcorn\templates\registration\password_change_form.html:11
+#: .\popcorn\templates\registration\password_change_form.html:35
 msgid "Change password"
 msgstr ""
 
@@ -414,10 +434,12 @@ msgid ""
 "We have sent you an email with a link to reset your password.\n"
 "            Please check your email and click the link to continue."
 msgstr ""
+"Wysłaliśmy do Ciebie wiadomość e-mail z linkiem do zresetowania hasła.\n"
+"            Sprawdź swoją pocztę i kliknij na link, aby kontynuować."
 
 #: .\popcorn\templates\registration\password_reset_email.html:1
 msgid "Greetings"
-msgstr ""
+msgstr "Cześć"
 
 #: .\popcorn\templates\registration\password_reset_email.html:4
 #, python-format
@@ -431,6 +453,14 @@ msgid ""
 "paste it\n"
 "    into your web browser:"
 msgstr ""
+"Otrzymujesz tę wiadomość e-mail, ponieważ Ty (lub ktoś podszywający się pod "
+"Ciebie)\n"
+"    poprosił o zresetowanie Twojego hasła na stronie %(domain)s.  Jeśli nie\n"
+"    chcesz zresetować swoje hasło, proszę z\n"
+"\n"
+"    Aby zresetować swoje hasło, proszę kliknąć na poniższy link lub "
+"skopiować i wkleić go\n"
+"    do przeglądarki internetowej:ignorować tę wiadomość."
 
 #: .\popcorn\templates\registration\password_reset_email.html:13
 #, python-format
@@ -441,13 +471,50 @@ msgid ""
 "    Best regards,\n"
 "    %(site_name)s Management\n"
 msgstr ""
+"\n"
+"    Twoja nazwa użytkownika, w razie gdybyś zapomniał: %(username)s\n"
+"\n"
+"    Pozdrawiamy,\n"
+"    Zarząd %(site_name)s\n"
 
-#: .\popcorn\templates\registration\password_reset_form.html:4
+#: .\popcorn\views.py:137
+#, fuzzy
+#| msgid "New email address"
+msgid "Enter a valid email address."
+msgstr "Wprowadź poprawny adres email."
+
+#: .\popcorn\views.py:141
 msgid ""
-"\n"
-"    Forgot your password?  Enter your email in the form below and we'll send "
-"you\n"
-"    instructions for creating a new one."
-msgstr ""
-"\n"
-"    Zapomniałeś hasła? Wprowadź adres na który założyłeś konto poniżej, a wyślemy Ci instrukcję jak je zresetować."
+"This email address is already in use. Please supply a different email address"
+msgstr "Ten adres email jest już używany. Użyj innego adresu email."
+
+#: .\popcorn\views.py:144
+msgid "Thank you for signing up."
+msgstr "Dziękujemy za zapisanie się do biuletynu."
+
+#, fuzzy
+#~| msgid "Login page"
+#~ msgid "Login page"
+#~ msgstr "Strona logowania"
+
+#, fuzzy
+#~| msgid "Login"
+#~ msgctxt "box title"
+#~ msgid "Login"
+#~ msgstr "Logowanie"
+
+#, fuzzy
+#~| msgid "Login"
+#~ msgctxt "Login button"
+#~ msgid "Login"
+#~ msgstr "Zaloguj się"
+
+#~ msgid ""
+#~ "\n"
+#~ "    Forgot your password?  Enter your email in the form below and we'll "
+#~ "send you\n"
+#~ "    instructions for creating a new one."
+#~ msgstr ""
+#~ "\n"
+#~ "    Zapomniałeś hasła? Wprowadź adres na który założyłeś konto poniżej, a "
+#~ "wyślemy Ci instrukcję jak je zresetować."

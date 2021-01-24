@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <html>
 <head>
     <title>{% block title %}Popcorn{% endblock %}</title>
@@ -14,6 +15,7 @@
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'popcorn/css/style.css' %}">
+    <script src="{% static 'popcorn/js/newsletter.js' %}"></script>
     {% block additional_js %}
     {% endblock additional_js %}
 
@@ -68,7 +70,8 @@
                 <label for="inputEmailNewsletter" class="sr-only">Adres Email Newsletter</label>
                 <input type="email" id="inputEmailNewsletter" class="form-control inputBox cstm-shadow"
                        placeholder="Adres Email" required>
-                <button class="btn classic-btn cstm-shadow btn-lg top-buffer align-self-end" type="submit">Zapisz
+                <div id="newsletter-signup-error" class="invalid-feedback"></div>
+                <button class="btn classic-btn cstm-shadow btn-lg top-buffer align-self-end" type="submit" id="newsletter-signup">Zapisz
                     się
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill"
                          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +82,9 @@
 
             </div>
             <div class="col py-2 d-flex flex-column">
-                <span class="text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</span>
+                <span class="text-muted">
+                    {% trans "The latest on food trends, healthy recipes, holiday baking ideas, and easy-to-make meals plus more. Sign up today and get newsletters delivered to your inbox for free!" %}
+                </span>
             </div>
         </div>
     </div>
