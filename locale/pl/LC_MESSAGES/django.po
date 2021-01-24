@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-23 23:12+0100\n"
+"POT-Creation-Date: 2021-01-24 11:23+0100\n"
 "PO-Revision-Date: 2021-01-23 23:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -331,6 +331,15 @@ msgid ""
 "account."
 msgstr ""
 
+#: .\popcorn\templates\popcorn\base.html:85
+msgid ""
+"The latest on food trends, healthy recipes, holiday baking ideas, and easy-"
+"to-make meals plus more. Sign up today and get newsletters delivered to your "
+"inbox for free!"
+msgstr ""
+"Najnowsze trendy żywieniowe, zdrowe przepisy, pomysły na świąteczne wypieki i łatwe do "
+"zrobienia potrawy oraz wiele innych. Zapisz się już dziś i otrzymuj przepisy dostarczane "
+"do Twojej skrzynki pocztowej za darmo!"
 #: .\popcorn\templates\registration\change_email.html:4
 #: .\popcorn\templates\registration\change_email.html:11
 #: .\popcorn\templates\registration\change_email.html:35
