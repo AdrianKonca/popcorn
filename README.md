@@ -12,7 +12,12 @@ in Django.
 
 ### Authors
 
-- TODO
+- [Magdalena Bikowska](https://github.com/magda3033)
+- [Roksana Jarema](https://github.com/nillyse)
+- [Adrian Końca](https://github.com/AdrianKonca)
+- [Grzegorz Muth](https://github.com/Grzesm)
+- [Sebastian Ratańczuk](https://github.com/Ictis0)
+- [Szymon Wojtach](https://github.com/szymoneiro)
 
 ### Setup
 
