@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <html>
 <head>
     <title>{% block title %}Popcorn{% endblock %}</title>
@@ -80,7 +81,9 @@
 
             </div>
             <div class="col py-2 d-flex flex-column">
-                <span class="text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</span>
+                <span class="text-muted">
+                    {% trans "The latest on food trends, healthy recipes, holiday baking ideas, and easy-to-make meals plus more. Sign up today and get newsletters delivered to your inbox for free!" %}
+                </span>
             </div>
         </div>
     </div>
