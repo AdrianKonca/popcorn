@@ -24,14 +24,14 @@
             <div class="col-xl-3 my-5">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class=" card-title naglowek cstm-shadow">Twoje Dane</h2>
-                        <p>Nazwa użytkownika: {{ user }}</p>
-                        <p>Data Rejestracji:<br> {{ user.date_joined.date }}</p>
-                        <p>Dni od rejestracji: {{ user_days_from_registration }}</p>
-                        <p>Adres email: {{ user.email }}</p>
+                        <h2 class=" card-title naglowek cstm-shadow">Twoje dane:</h2>
+                        <p><strong>Nazwa użytkownika:</strong> {{ user }}</p>
+                        <p><strong>Data Rejestracji:</strong><br> {{ user.date_joined.date }}</p>
+                        <p><strong>Dni od rejestracji:</strong> {{ user_days_from_registration }}</p>
+                        <p><strong>Adres email:</strong> {{ user.email }}</p>
 
                         <div class="text-center">
-                            <button class="btn classic-btn cstm-shadow btn-lg mt-2 mx-auto" type="submit"
+                            <button class="btn classic-btn cstm-shadow btn-lg mt-2 mx-auto btn-block" type="submit"
                                     onclick="location.href = '{% url 'password_change' %}'">Zmiana hasła
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill"
                                      fill="currentColor"
@@ -40,7 +40,7 @@
                                 </svg>
                             </button>
 
-                            <button class="btn classic-btn cstm-shadow btn-lg mt-2 mx-auto" type="submit"
+                            <button class="btn classic-btn cstm-shadow btn-lg mt-2 mx-auto btn-block" type="submit"
                                     onclick="location.href = '{% url 'email_change' %}'">Zmiana adresu email
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill"
                                      fill="currentColor"

@@ -5,7 +5,7 @@
     <div class="container my-3">
         <h2 class="naglowek my-5 cstm-shadow">Najlepsze przepisy w tym tygodniu:</h2>
         <!--Carousel Wrapper-->
-        <div id="carousel-example-1z" class="carousel slide  z-depth-1-half" data-ride="carousel" style="height: 425px">
+        <div id="carousel-example-1z" class="carousel slide  z-depth-1-half" data-ride="carousel" >
             <!--Indicators-->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -23,12 +23,16 @@
                         <div class="carousel-item">
                     {% endif %}
                 <div class="card p-3">
-                    <div class="row align-self-middle">
-                        <div class="col-sm justify-content-center top-buffer align-self-top">
-                            <img class="test-img mx-auto d-block" src={{ r.icon.url }}>
-                        </div>
-                        <div class="col-sm top-buffer">
-                            <div class="card-header">Data dodania: {{ r.created_on }}</div>
+                <div class="card-header">Data dodania: {{ r.created_on }}</div>
+                <div class="row align-self-middle">
+                    <div class="col-sm justify-content-center top-buffer align-self-top">
+                        <img class="img-fluid mx-auto d-block" src={{ r.icon.url }}>
+                    </div>
+                    <div class="col-sm top-buffer">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ r.name }}</h3>
+                            <h5>{{ r.author }}</h5>
+                            
                             <div class="row top-buffer">
                                 <div class="col-sm">
                                     <h6 class="text-muted">czas: {{ r.preparation_time }} min.</h6>
@@ -43,19 +47,22 @@
                                     <h6 class="text-muted">punktacja: {{ r.vote_score }}</h6>
                                 </div>
                             </div>
-
-                            <div class="card-body">
-                                {% for tag in r.categories.all %}
-                                    <a href={% url 'category' tag.id %}> {{ tag }}</a>
-                                {% endfor %}
-                                <h3 class="card-title">{{ r.name }}</h3>
-                                <h5>{{ r.author }}</h5>
-                                <div>{{ r.content|safe }}</div>
-
-                            </div>
                         </div>
-                        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+                        
+                        <div class"card-footer">
+                        {% for tag in r.categories.all %}
+                                <a href={% url 'category' tag.id %}> {{ tag }}</a>
+                        {% endfor %}
+                        </div>
+                            
+
+                        </div>
+
+                        
+                        
                     </div>
+                    <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+                </div>
                 </div>
                 </div>
                 {% endfor %}
@@ -75,74 +82,75 @@
             </div>
             <!--/.Carousel Wrapper-->
         </div>
+    </div>
 
-        <div class="container my-3">
-            <h2 class="naglowek my-5 cstm-shadow">Nowe przepisy w tym tygodniu:</h2>
-            <div class="card-deck">
-                {% for r in recipes %}
-                    <div class="col mt-3">
-                        <div class="card h-100">
-                            <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
-                            <div class="card-body">
-                                <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                                <div class="py-2">
-                                    <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
-                                    <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
-                                </div>
-                                <div class="py-2">
-                                    <button type="button" class="btn btn-warning">Zapisz</button>
-                                </div>
-                            </div>
-                            <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+    <div class="container my-3">
+        <h2 class="naglowek my-5 cstm-shadow">Nowe przepisy w tym tygodniu:</h2>
+        <div class="card-deck">
+            {% for r in recipes %}
+                <div class="col mt-3">
+                    <div class="card h-100">
+                        <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
+                        <div class="card-body">
+                            <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
                         </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <div class="py-2">
+                                <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
+                                <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                            </div>
+                            <div class="py-2">
+                                <button type="button" class="btn btn-warning">Zapisz</button>
+                            </div>
+                        </div>
+                        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
                     </div>
-                {% endfor %}
-            </div>
-            <button class="my-5 btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
-                    onclick="location.href = '{% url 'all_recipes' %}'">Pokaż więcej przepisów
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path
-                            d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
-                </svg>
-            </button>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="my-5 btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
+                onclick="location.href = '{% url 'all_recipes' %}'">Pokaż więcej przepisów
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="container my-3 ">
+        <h2 class="naglowek my-5 cstm-shadow">Polecane dla ciebie:</h2>
+        <div class="card-deck">
+            {% for r in proposed %}
+                <div class="col mt-3">
+                    <div class="card h-100">
+                        <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
+                        <div class="card-body">
+                            <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <div class="py-2">
+                                <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
+                                <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+                            </div>
+                            <div class="py-2">
+                                <button type="button" class="btn btn-warning">Zapisz</button>
+                            </div>
+                        </div>
+                        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
 
-        <div class="container my-3 ">
-            <h2 class="naglowek my-5 cstm-shadow">Polecane dla ciebie:</h2>
-            <div class="card-deck">
-                {% for r in proposed %}
-                    <div class="col mt-3">
-                        <div class="card h-100">
-                            <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
-                            <div class="card-body">
-                                <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                                <div class="py-2">
-                                    <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
-                                    <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
-                                </div>
-                                <div class="py-2">
-                                    <button type="button" class="btn btn-warning">Zapisz</button>
-                                </div>
-                            </div>
-                            <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
-            <button class="my-5 btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
-                    onclick="location.href = '{% url 'all_recipes' %}'">Pokaż więcej przepisów
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path
-                            d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
-                </svg>
-            </button>
-        </div>
+        <button class="my-5 btn classic-btn cstm-shadow btn-lg btn-block" type="submit"
+                onclick="location.href = '{% url 'all_recipes' %}'">Pokaż więcej przepisów
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"></path>
+            </svg>
+        </button>
+    </div>
 
 {% endblock %}
