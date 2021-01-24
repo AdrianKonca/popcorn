@@ -36,11 +36,6 @@ def index(request):
                       'proposed': Recipe.objects.get_proposed()
                   })
 
-
-def recipe(request):
-    return render(request, 'popcorn/recipe.html')
-
-
 class RecipeView(generic.DetailView):
     model = Recipe
     template_name = 'popcorn/recipe.html'
