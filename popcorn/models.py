@@ -161,6 +161,6 @@ class Comment(VoteModel, models.Model, VoteUtilities):
 
 
 class NewsletterSignup(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     on = models.DateTimeField(auto_now_add=True)
 
