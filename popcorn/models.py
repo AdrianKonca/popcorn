@@ -160,13 +160,7 @@ class Comment(VoteModel, models.Model, VoteUtilities):
         return self.deleted_on is not None
 
 
-class Measurment(models.Model):
-    full_name = models.CharField(max_length=120)
-    short_name = models.CharField(max_length=6)
+class NewsletterSignup(models.Model):
+    email = models.EmailField(unique=True)
+    on = models.DateTimeField(auto_now_add=True)
 
-
-class Ingredient(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    name = models.CharField(max_length=120)
-    count = models.PositiveIntegerField()
-    measurment = models.ForeignKey(Measurment, on_delete=models.SET_NULL, null=True)

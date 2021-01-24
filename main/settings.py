@@ -32,7 +32,7 @@ else:
     EMAIL_HOST_PASSWORD = os.environ['POPCORN_EMAIL_HOST_PASSWORD']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = IS_LOCAL
 
 ALLOWED_HOSTS = ['*']
 
