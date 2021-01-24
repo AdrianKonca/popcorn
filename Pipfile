@@ -19,6 +19,7 @@ django-recaptcha = "*"
 gunicorn = "*"
 django-heroku = "*"
 psycopg2 = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"
