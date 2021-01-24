@@ -1,0 +1,18 @@
+<div class="col mt-3">
+    <div class="card h-100">
+        <img class="card-img-top mx-auto d-block" src={{ r.icon.url }}>
+        <div class="card-body">
+            <h5 class="card-title" href=" {% url 'recipe' r.slug %}">{{ r.name }}</h5>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <div class="py-2">
+                <h6 class="text-muted text-left">punktacja: {{ r.vote_score }}</h6>
+                <h6 class="text-muted text-left">czas: {{ r.preparation_time }}min</h6>
+            </div>
+            <div class="py-2">
+                <button type="button" class="btn btn-warning">Zobacz</button>
+            </div>
+        </div>
+        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+    </div>
+</div>
