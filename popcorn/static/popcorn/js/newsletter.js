@@ -14,6 +14,14 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function parseResponse(response) {
+    if (response.status === 200) {
+        return response.json();
+    } else {
+        return null;
+    }
+}
+
 function displaySignupMessage(body) {
     if (body === null) {
         return;
