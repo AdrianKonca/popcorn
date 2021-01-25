@@ -4,10 +4,38 @@
     {% else %}
         <div class="carousel-item">
     {% endif %}
+<div class="card p-3 h-100">
+    <div class="row align-self-middle">
+        <div class="col-md-6 justify-content-center top-buffer align-self-top">
+            <img class="test-img img-fluid mx-auto d-block" src={{ r.icon.url }}>
+        </div>
+        <div class="col-md-6 top-buffer">
+            <div class="card-header">Data dodania: {{ r.created_on }}</div>
+            <div class="row top-buffer">
+                <div class="col-sm">
+                    <h6 class="text-muted">czas: {{ r.preparation_time }} min.</h6>
+                </div>
+                <div class="col-sm">
+                    <h6 class="text-muted">trudność: {{ r.difficulty }}</h6>
+                </div>
+                <div class="col-sm">
+                    <h6 class="text-muted">porcje: {{ r.servings_count }}</h6>
+                </div>
+                <div class="col-sm">
+                    <h6 class="text-muted">punktacja: {{ r.vote_score }}</h6>
+                </div>
+            </div>
 
-    <div>
-
+            <div class="card-body">
+                <h3 class="card-title">{{ r.name }}</h3>
+                <h5>{{ r.author }}</h5>
+                {% for tag in r.categories.all %}
+                    <a href={% url 'category' tag.id %}> {{ tag }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
     </div>
-
+</div>
 </div>
 {% endfor %}
