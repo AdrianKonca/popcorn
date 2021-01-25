@@ -4,7 +4,14 @@
 {% block content %}
     {% url 'login' as auth_login_url %}
     {% blocktrans %}
-        Thanks, activation complete!  You may now <a href='{{ auth_login_url }}'>login</a> using the username and
-        password you set at registration.
+    <div class="top-buffer card text-center">
+        <div class="card-body">
+            <h2 class="card-title">Dziękujemy!</h2>
+            <h5 class="card-text">Aktywacja twojego konta przebiegła pomyślnie!</h5>
+            <p>Kliknij przycisk żeby zalogować sie na swoje konto!</p>
+            <a href='{{ auth_login_url }}' class="btn btn-warning">Zaloguj się</a>
+            <p>Smacznego użytkowania!</p>
+        </div>
+    </div>
     {% endblocktrans %}
 {% endblock %}

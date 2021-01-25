@@ -15,19 +15,19 @@
                 {% if request.user == recipe.author %}
                     <div class="col">
                         <div class="text-right">
-                            <a class="btn classic-btn" href=" {% url 'edit_recipe' recipe.slug %}">Edytuj</a>
+                            <a class="btn classic-btn cstm-shadow btn-lg" href=" {% url 'edit_recipe' recipe.slug %}">Edytuj</a>
                         </div>
                     </div>
                 {% endif %}
-                <h2 class="card-title text-center">{{ recipe.name }}</h2>
+                <h2 class="card-title naglowek my-2 cstm-shadow">{{ recipe.name }}</h2>
                 {% if recipe.author %}
-                    <h4 class="text-center">Autor: {{ recipe.author }}</h4>
+                    <h4 class="text-center"><strong>Autor: </strong>{{ recipe.author }}</h4>
                 {% else %}
-                    <h4 class="text-center">Autor: Brak</h4>
+                    <h4 class="text-center"><strong>Autor:</strong> Brak</h4>
                 {% endif %}
-                <h4 class="text-center">Czas wykonania: {{ recipe.preparation_time }} min</h4>
-                <h4 class="text-center">Ilość porcji: {{ recipe.servings_count }}</h4>
-                <h4 class="text-center">Trudność wykonania: {{ recipe.get_difficulty_display }}</h4>
+                <h4 class="text-center"><strong>Czas wykonania:</strong> {{ recipe.preparation_time }} min</h4>
+                <h4 class="text-center"><strong>Ilość porcji</strong>: {{ recipe.servings_count }}</h4>
+                <h4 class="text-center"><strong>Trudność wykonania:</strong> {{ recipe.get_difficulty_display }}</h4>
 
                 <!--TODO: Add scaling-->
                 {% if recipe.icon %}
@@ -109,11 +109,16 @@
                     {% endfor %}
                 </div>
 
-                <!--TODO: Add categories -->
-                {% for tag in recipe.categories.all %}
-                    <a href={% url 'category' tag.id %}> {{ tag }}</a>
-                {% endfor %}
+                
             </div>
+
+        </div>
+        <div class="card-footer">
+            <!--TODO: Add categories -->
+            | 
+                {% for tag in recipe.categories.all %}
+                    <a href={% url 'category' tag.id %}> {{ tag }} </a> |
+                {% endfor %}
         </div>
     </div>
 {% endblock %}

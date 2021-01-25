@@ -3,8 +3,11 @@
 
 {% block content %}
     <div class="container-fluid mb-3">
+        <h2 class="naglowek my-5 cstm-shadow">Podział ze względu na porę dnia:</h2>
         <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
             {% for c in categories %}
+                {% if c.get_tag_display == "Pora" %}
+                
                 <div class="col mt-3">
                     <div class="card h-100">
                         {% if c.image %}
@@ -13,10 +16,57 @@
                         <div class="card-body">
                             <h5 class="card-title text-center"><a><a href="{{ c.id }}">{{ c.name }} </a>
                             </a></h5>
+                            
                             <p class="card-text"></p>
+                            <a href="{{ c.id }}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <h2 class="naglowek my-5 cstm-shadow">Podział ze względu na rodzaj diety:</h2>
+        <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+            {% for c in categories %}
+                {% if c.get_tag_display == "Rodzaj" %}
+                
+                <div class="col mt-3">
+                    <div class="card h-100">
+                        {% if c.image %}
+                            <img class="card-img-top" src="{{ c.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title "><a><a href="{{ c.id }}">{{ c.name }} </a>
+                            </a></h5>
+                            
+                            <p class="card-text"></p>
+                            <a href="{{ c.id }}" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <h2 class="naglowek my-5 cstm-shadow">Podział ze względu na kategorie dania:</h2>
+        <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+            {% for c in categories %}
+                {% if c.get_tag_display == "Kategoria" %}
+                
+                <div class="col mt-3">
+                    <div class="card h-100">
+                        {% if c.image %}
+                            <img class="card-img-top" src="{{ c.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title "><a><a href="{{ c.id }}">{{ c.name }} </a>
+                            </a></h5>
+                            
+                            <p class="card-text"></p>
+                            <a href="{{ c.id }}" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

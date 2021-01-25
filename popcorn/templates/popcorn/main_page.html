@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container my-3">
         <!--Carousel Wrapper-->
-        <div id="carousel-example-1z" class="carousel slide  z-depth-1-half" data-ride="carousel" style="height: 425px">
+        <div id="carousel-example-1z" class="carousel slide  z-depth-1-half" data-ride="carousel" >
             <!--Indicators-->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -22,12 +22,16 @@
                         <div class="carousel-item">
                     {% endif %}
                 <div class="card p-3">
-                    <div class="row align-self-middle">
-                        <div class="col-sm justify-content-center top-buffer align-self-top">
-                            <img class="test-img mx-auto d-block" src={{ r.icon.url }}>
-                        </div>
-                        <div class="col-sm top-buffer">
-                            <div class="card-header">Data dodania: {{ r.created_on }}</div>
+                <div class="card-header">Data dodania: {{ r.created_on }}</div>
+                <div class="row align-self-middle">
+                    <div class="col-sm justify-content-center top-buffer align-self-top">
+                        <img class="img-fluid mx-auto d-block" src={{ r.icon.url }}>
+                    </div>
+                    <div class="col-sm top-buffer">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ r.name }}</h3>
+                            <h5>{{ r.author }}</h5>
+                            
                             <div class="row top-buffer">
                                 <div class="col-sm">
                                     <h6 class="text-muted">czas: {{ r.preparation_time }} min.</h6>
@@ -42,19 +46,22 @@
                                     <h6 class="text-muted">punktacja: {{ r.vote_score }}</h6>
                                 </div>
                             </div>
-
-                            <div class="card-body">
-                                {% for tag in r.categories.all %}
-                                    <a href={% url 'category' tag.id %}> {{ tag }}</a>
-                                {% endfor %}
-                                <h3 class="card-title">{{ r.name }}</h3>
-                                <h5>{{ r.author }}</h5>
-                                <div>{{ r.content|safe }}</div>
-
-                            </div>
                         </div>
-                        <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+                        
+                        <div class"card-footer">
+                        {% for tag in r.categories.all %}
+                                <a href={% url 'category' tag.id %}> {{ tag }}</a>
+                        {% endfor %}
+                        </div>
+                            
+
+                        </div>
+
+                        
+                        
                     </div>
+                    <a href="  {% url 'recipe' r.slug %}" class="stretched-link"></a>
+                </div>
                 </div>
                 </div>
                 {% endfor %}
