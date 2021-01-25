@@ -31,9 +31,9 @@ class LoginViewWithRememberMe(LoginView):
 def index(request):
     return render(request, 'popcorn/main_page.html',
                   {
-                      'lastweek': Recipe.objects.get_lastweek(),
-                      'recipes': Recipe.objects.get_best_recipes(),
-                      'proposed': Recipe.objects.get_proposed()
+                      'lastweek': Recipe.objects.get_lastweek(6),
+                      'recipes': Recipe.objects.get_best_recipes(6),
+                      'proposed': Recipe.objects.get_best_recipes(12)[6:12]
                   })
 
 class RecipeView(generic.DetailView):
